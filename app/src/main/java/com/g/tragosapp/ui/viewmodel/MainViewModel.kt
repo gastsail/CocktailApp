@@ -1,7 +1,6 @@
 package com.g.tragosapp.ui.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.g.tragosapp.domain.Repo
 import com.g.tragosapp.vo.Resource
 import kotlinx.coroutines.Dispatchers
@@ -12,13 +11,40 @@ import kotlinx.coroutines.Dispatchers
 
 class MainViewModel(private val repo:Repo):ViewModel(){
 
-    val fetchTragosList = liveData(Dispatchers.IO) {
-        emit(Resource.Loading())
-        try{
-            emit(repo.getTragosList("margarita"))
-        }catch (e: Exception){
-            emit(Resource.Failure(e))
+    private val tragoNameData = MutableLiveData<String>()
+    private val alcoholicOrnotData = MutableLiveData<String>()
+
+    fun setTrago(tragoName:String){
+        tragoNameData.value = tragoName
+    }
+
+    fun setAlcoholicOrNotFilter(alcoholicOrNot:String){
+        alcoholicOrnotData.value = alcoholicOrNot
+    }
+
+    init {
+        setTrago("mojito")
+    }
+
+    val fetchTragosList = tragoNameData.distinctUntilChanged().switchMap { tragoName ->
+        liveData(Dispatchers.IO) {
+            emit(Resource.Loading())
+            try{
+                emit(repo.getTragosList(tragoName))
+            }catch (e: Exception){
+                emit(Resource.Failure(e))
+            }
         }
     }
 
+    val fetchAlcoholicFilter = alcoholicOrnotData.distinctUntilChanged().switchMap { isAlcoholic ->
+        liveData(Dispatchers.IO) {
+            emit(Resource.Loading())
+            try{
+                emit(repo.getAlcoholicDrinks(isAlcoholic))
+            }catch (e: Exception){
+                emit(Resource.Failure(e))
+            }
+        }
+    }
 }

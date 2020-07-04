@@ -2,10 +2,9 @@ package com.g.tragosapp.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -33,12 +32,18 @@ class MainFragment : Fragment(),MainAdapter.OnTragoClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setupSearchView()
+        setupDefaultTragosList()
+    }
+
+    private fun setupDefaultTragosList(){
         viewModel.fetchTragosList.observe(viewLifecycleOwner, Observer { result ->
             when(result){
                 is Resource.Loading -> {
@@ -55,6 +60,58 @@ class MainFragment : Fragment(),MainAdapter.OnTragoClickListener {
                 }
             }
         })
+
+        viewModel.fetchAlcoholicFilter.observe(viewLifecycleOwner, Observer { result ->
+            when(result){
+                is Resource.Loading -> {
+                    progressBar.visibility = View.VISIBLE
+                }
+                is Resource.Success -> {
+                    progressBar.visibility = View.GONE
+                    rv_tragos.adapter = MainAdapter(requireContext(),result.data,this)
+                }
+                is Resource.Failure -> {
+                    progressBar.visibility = View.GONE
+                    Log.e("MainFragment", "onRetrofitRequest: ${result.exception}")
+                    Toast.makeText(requireContext(), "Ocurrió un error al traer los datos ${result.exception}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        })
+    }
+
+    private fun setupSearchView(){
+        searchView.setOnQueryTextListener(object:androidx.appcompat.widget.SearchView.OnQueryTextListener{
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.setTrago(query!!)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {return false}
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main_menu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.filtroSinAlcohol -> {
+                viewModel.setAlcoholicOrNotFilter("Non_Alcoholic")
+                false
+            }
+
+            R.id.filtroConAlcohol -> {
+                viewModel.setAlcoholicOrNotFilter("Alcoholic")
+                false
+            }
+            else -> {
+                false
+            }
+        }
     }
 
     override fun onTragoClick(drink: Drink) {
