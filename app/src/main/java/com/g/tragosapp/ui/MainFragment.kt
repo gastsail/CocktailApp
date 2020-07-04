@@ -1,6 +1,7 @@
 package com.g.tragosapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +50,7 @@ class MainFragment : Fragment(),MainAdapter.OnTragoClickListener {
                 }
                 is Resource.Failure -> {
                     progressBar.visibility = View.GONE
+                    Log.e("MainFragment", "onRetrofitRequest: ${result.exception}")
                     Toast.makeText(requireContext(), "Ocurrió un error al traer los datos ${result.exception}", Toast.LENGTH_SHORT).show()
                 }
             }
