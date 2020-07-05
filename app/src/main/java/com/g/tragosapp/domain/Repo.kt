@@ -1,6 +1,7 @@
 package com.g.tragosapp.domain
 
 import com.g.tragosapp.data.model.Drink
+import com.g.tragosapp.data.model.DrinkEntity
 import com.g.tragosapp.vo.Resource
 
 /**
@@ -8,4 +9,6 @@ import com.g.tragosapp.vo.Resource
  */
 interface Repo {
     suspend fun getTragosList(nombreTrago:String): Resource<List<Drink>>
+    suspend fun insertTrago(trago:DrinkEntity)
+    suspend fun getTragosFavoritos():Resource<List<DrinkEntity>>
 }

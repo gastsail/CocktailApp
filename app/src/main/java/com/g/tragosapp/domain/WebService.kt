@@ -12,6 +12,6 @@ import retrofit2.http.Query
  */
 interface WebService {
 
-    @GET("search.php?s=")
-    suspend fun getTragoByName(@Query(value = "tragoName") tragoName:String): DrinkList
+    @GET("search.php")
+    suspend fun getTragoByName(@Query(value = "s") tragoName:String): DrinkList
 }
