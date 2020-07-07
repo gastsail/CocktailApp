@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.g.tragosapp.R
 import com.g.tragosapp.base.BaseViewHolder
 import com.g.tragosapp.data.model.Drink
-import kotlinx.android.synthetic.main.header_row.view.*
 import kotlinx.android.synthetic.main.tragos_row.view.*
 
 /**

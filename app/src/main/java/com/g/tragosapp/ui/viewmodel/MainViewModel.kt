@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 class MainViewModel(private val repo:Repo):ViewModel(){
 
     private val tragosData = MutableLiveData<String>()
-    private val refreshLiveData = MutableLiveData<List<DrinkEntity>>()
 
     fun setTrago(tragoName:String){
         tragosData.value = tragoName
@@ -35,19 +34,18 @@ class MainViewModel(private val repo:Repo):ViewModel(){
         }
     }
 
-
-    fun insertTragoIntoFavorites(trago:DrinkEntity){
+    fun guardarTrago(trago:DrinkEntity){
         viewModelScope.launch {
             repo.insertTrago(trago)
         }
     }
 
     fun getTragosFavoritos() = liveData(Dispatchers.IO) {
-            emit(Resource.Loading())
-            try {
-                emit(repo.getTragosFavoritos())
-            }catch (e:Exception){
-                emit(Resource.Failure(e))
-            }
+        emit(Resource.Loading())
+        try{
+            emit(repo.getTragosFavoritos())
+        }catch (e: Exception){
+            emit(Resource.Failure(e))
         }
+    }
 }
