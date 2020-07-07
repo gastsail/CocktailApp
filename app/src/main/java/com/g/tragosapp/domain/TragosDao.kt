@@ -1,14 +1,13 @@
 package com.g.tragosapp.domain
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.g.tragosapp.data.model.DrinkEntity
 
 /**
  * Created by Gastón Saillén on 07 July 2020
  */
+
+@Dao
 interface TragosDao {
 
     @Query("SELECT * FROM tragosEntity")

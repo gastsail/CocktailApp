@@ -44,6 +44,9 @@ class MainFragment : Fragment(),MainAdapter.OnTragoClickListener {
         setupRecyclerView()
         setupSearchView()
         setupObservers()
+        btn_ir_favoritos.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_favoritosFragment)
+        }
     }
 
     private fun setupObservers(){
