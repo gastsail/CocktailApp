@@ -2,6 +2,7 @@ package com.g.tragosapp.domain
 
 import com.g.tragosapp.data.DataSource
 import com.g.tragosapp.data.model.Drink
+import com.g.tragosapp.data.model.DrinkEntity
 import com.g.tragosapp.vo.Resource
 
 /**
@@ -9,11 +10,15 @@ import com.g.tragosapp.vo.Resource
  */
 class RepoImpl(private val dataSource: DataSource): Repo {
 
-    override suspend fun getTragosList(tragoName:String): Resource<List<Drink>> {
-        return dataSource.getTragoByName(tragoName)
+    override suspend fun getTragosList(nombreTrago:String): Resource<List<Drink>> {
+        return dataSource.getTragoByName(nombreTrago)
     }
 
-    override suspend fun getAlcoholicDrinks(alcoholic: String?): Resource<List<Drink>> {
-        return dataSource.getAlcoholicDrinks(alcoholic)
+    override suspend fun getTragosFavoritos(): Resource<List<DrinkEntity>> {
+        return dataSource.getTragosFavoritos()
+    }
+
+    override suspend fun insertTrago(trago: DrinkEntity) {
+        dataSource.insertTragoIntoRoom(trago)
     }
 }

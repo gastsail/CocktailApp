@@ -12,11 +12,27 @@
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_tragosDetalleFragment"
-            app:destination="@id/tragosDetalleFragment" />
+            app:destination="@id/tragosDetalleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_favoritosFragment"
+            app:destination="@id/favoritosFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/tragosDetalleFragment"
         android:name="com.g.tragosapp.ui.TragosDetalleFragment"
         android:label="Detalles"
         tools:layout="@layout/fragment_tragos_detalle" />
+    <fragment
+        android:id="@+id/favoritosFragment"
+        android:name="com.g.tragosapp.ui.FavoritosFragment"
+        android:label="fragment_favoritos"
+        tools:layout="@layout/fragment_favoritos" />
 </navigation>
