@@ -57,7 +57,7 @@ class MainFragment : Fragment(),MainAdapter.OnTragoClickListener {
                 }
                 is Resource.Success -> {
                     progressBar.visibility = View.GONE
-                    rv_tragos.adapter = MainAdapter(requireContext(), result.data,this)
+                    rv_tragos.adapter = MainAdapter(requireContext(), result.data.toMutableList(),this)
                 }
                 is Resource.Failure -> {
                     progressBar.visibility = View.GONE
@@ -81,7 +81,7 @@ class MainFragment : Fragment(),MainAdapter.OnTragoClickListener {
         })
     }
 
-    override fun onTragoClick(drink: Drink) {
+    override fun onTragoClick(drink: Drink,position:Int) {
         val bundle = Bundle()
         bundle.putParcelable("drink",drink)
         findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment,bundle)

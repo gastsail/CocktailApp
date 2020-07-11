@@ -1,6 +1,7 @@
 package com.g.tragosapp.ui.viewmodel
 
 import androidx.lifecycle.*
+import com.g.tragosapp.data.model.Drink
 import com.g.tragosapp.data.model.DrinkEntity
 import com.g.tragosapp.domain.Repo
 import com.g.tragosapp.vo.Resource
@@ -46,6 +47,12 @@ class MainViewModel(private val repo:Repo):ViewModel(){
             emit(repo.getTragosFavoritos())
         }catch (e: Exception){
             emit(Resource.Failure(e))
+        }
+    }
+
+    fun deleteDrink(drink: DrinkEntity) {
+        viewModelScope.launch {
+            repo.deleteDrink(drink)
         }
     }
 }
