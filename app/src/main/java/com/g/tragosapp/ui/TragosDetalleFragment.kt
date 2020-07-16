@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.g.tragosapp.AppDatabase
 import com.g.tragosapp.R
-import com.g.tragosapp.data.DataSource
+import com.g.tragosapp.data.DataSourceImpl
 import com.g.tragosapp.data.model.Drink
 import com.g.tragosapp.data.model.DrinkEntity
 import com.g.tragosapp.domain.RepoImpl
@@ -22,8 +22,7 @@ class TragosDetalleFragment : Fragment() {
 
     private val viewModel by activityViewModels<MainViewModel> { VMFactory(
         RepoImpl(
-            DataSource(AppDatabase.getDatabase(requireActivity().applicationContext)))) }
-
+            DataSourceImpl(AppDatabase.getDatabase(requireActivity().applicationContext)))) }
 
     private lateinit var drink: Drink
 

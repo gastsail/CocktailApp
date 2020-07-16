@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.g.tragosapp.AppDatabase
 import com.g.tragosapp.R
-import com.g.tragosapp.data.DataSource
+import com.g.tragosapp.data.DataSourceImpl
 import com.g.tragosapp.data.model.Drink
 import com.g.tragosapp.domain.RepoImpl
 import com.g.tragosapp.ui.viewmodel.MainViewModel
@@ -24,13 +24,10 @@ import com.g.tragosapp.vo.Resource
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment(),MainAdapter.OnTragoClickListener {
-
-    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSource(
+    
+    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSourceImpl(
         AppDatabase.getDatabase(requireActivity().applicationContext)))) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
