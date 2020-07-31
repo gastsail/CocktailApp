@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
  * Created by Gastón Saillén on 03 July 2020
  */
 
-class MainViewModel(private val repo:Repo):ViewModel(){
+class MainViewModel (private val repo:Repo):ViewModel(){
 
     private val tragosData = MutableLiveData<String>()
 
