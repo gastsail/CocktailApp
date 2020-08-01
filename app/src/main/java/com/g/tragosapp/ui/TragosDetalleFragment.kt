@@ -16,13 +16,13 @@ import com.g.tragosapp.data.model.DrinkEntity
 import com.g.tragosapp.domain.RepoImpl
 import com.g.tragosapp.ui.viewmodel.MainViewModel
 import com.g.tragosapp.ui.viewmodel.VMFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_tragos_detalle.*
 
+@AndroidEntryPoint
 class TragosDetalleFragment : Fragment() {
 
-    private val viewModel by activityViewModels<MainViewModel> { VMFactory(
-        RepoImpl(
-            DataSourceImpl(AppDatabase.getDatabase(requireActivity().applicationContext)))) }
+    private val viewModel by activityViewModels<MainViewModel>()
 
     private lateinit var drink: Drink
 

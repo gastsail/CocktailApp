@@ -1,5 +1,6 @@
 package com.g.tragosapp.ui.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.g.tragosapp.data.model.Drink
 import com.g.tragosapp.data.model.DrinkEntity
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
  * Created by Gastón Saillén on 03 July 2020
  */
 
-class MainViewModel (private val repo:Repo):ViewModel(){
+class MainViewModel @ViewModelInject constructor(private val repo:Repo):ViewModel(){
 
     private val tragosData = MutableLiveData<String>()
 

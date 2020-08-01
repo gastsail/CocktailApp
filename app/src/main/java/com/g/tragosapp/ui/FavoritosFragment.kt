@@ -33,12 +33,7 @@ class FavoritosFragment : Fragment(),MainAdapter.OnTragoClickListener {
     @Inject
     lateinit var tragosDao: TragosDao
 
-    private val viewModel by activityViewModels<MainViewModel> { VMFactory(
-        RepoImpl(
-            DataSourceImpl(
-        AppDatabase.getDatabase(requireActivity().applicationContext))
-        )
-    ) }
+    private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

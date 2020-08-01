@@ -21,13 +21,13 @@ import com.g.tragosapp.domain.RepoImpl
 import com.g.tragosapp.ui.viewmodel.MainViewModel
 import com.g.tragosapp.ui.viewmodel.VMFactory
 import com.g.tragosapp.vo.Resource
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
 
+@AndroidEntryPoint
 class MainFragment : Fragment(),MainAdapter.OnTragoClickListener {
-    
-    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSourceImpl(
-        AppDatabase.getDatabase(requireActivity().applicationContext)))) }
 
+    private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
