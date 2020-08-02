@@ -7,6 +7,7 @@ This is a clean architecture app example built with
 - Dagger Hilt
 - Retrofit
 - Room
+- Navigation Components
 
 # Architecture
 
