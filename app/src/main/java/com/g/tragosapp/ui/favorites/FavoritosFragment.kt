@@ -15,6 +15,7 @@ import com.g.tragosapp.data.model.Drink
 import com.g.tragosapp.data.model.DrinkEntity
 import com.g.tragosapp.ui.MainAdapter
 import com.g.tragosapp.ui.viewmodel.MainViewModel
+import com.g.tragosapp.utils.ext.asDrinkList
 import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_favoritos.*
@@ -25,10 +26,6 @@ class FavoritosFragment : Fragment(),
 
     private lateinit var adapter: MainAdapter
     private val viewModel by activityViewModels<MainViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,9 +45,7 @@ class FavoritosFragment : Fragment(),
             when(result){
                 is Resource.Loading -> {}
                 is Resource.Success -> {
-                    val lista = result.data.map {
-                        Drink(it.tragoId,it.imagen,it.nombre,it.descripcion,it.hasAlcohol)
-                    }.toMutableList()
+                    val lista = result.data.asDrinkList()
 
                     adapter = MainAdapter(
                         requireContext(),
@@ -60,7 +55,11 @@ class FavoritosFragment : Fragment(),
                     rv_tragos_favoritos.adapter = adapter
                 }
                 is Resource.Failure -> {
-
+                    Toast.makeText(
+                        requireContext(),
+                        "Ocurrió un error ${result.exception}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         })

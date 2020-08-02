@@ -40,11 +40,6 @@ class TragosDetalleFragment : Fragment() {
         Glide.with(requireContext()).load(drink.imagen).centerCrop().into(img_trago)
         trago_title.text = drink.nombre
         trago_desc.text = drink.descripcion
-        if(drink.hasAlcohol == "Non_Alcoholic"){
-            txt_has_alcohol.text = "Bebida sin alcohol"
-        }else{
-            txt_has_alcohol.text = "Bebida con alcohol"
-        }
 
         btn_guardar_trago.setOnClickListener {
             viewModel.guardarTrago(DrinkEntity(drink.tragoId,drink.imagen,drink.nombre,drink.descripcion,drink.hasAlcohol))

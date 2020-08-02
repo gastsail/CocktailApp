@@ -57,7 +57,6 @@ class MainFragment : Fragment(),MainAdapter.OnTragoClickListener {
                 }
                 is Resource.Failure -> {
                     progressBar.visibility = View.GONE
-                    Log.e("MainFragment", "onRetrofitRequest: ${result.exception}")
                     Toast.makeText(requireContext(), "Ocurrió un error al traer los datos ${result.exception}", Toast.LENGTH_SHORT).show()
                 }
             }
