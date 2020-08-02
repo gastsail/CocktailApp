@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.g.tragosapp.R
 import com.g.tragosapp.data.model.Drink
 import com.g.tragosapp.data.model.DrinkEntity
+import com.g.tragosapp.data.model.asDrinkList
 import com.g.tragosapp.ui.MainAdapter
 import com.g.tragosapp.ui.viewmodel.MainViewModel
-import com.g.tragosapp.utils.ext.asDrinkList
 import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_favoritos.*

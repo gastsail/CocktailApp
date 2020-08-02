@@ -46,3 +46,7 @@ data class DrinkEntity(
     @ColumnInfo(name = "trago_has_alcohol")
     val hasAlcohol:String = "Non_Alcoholic"
 )
+
+fun List<DrinkEntity>.asDrinkList(): MutableList<Drink> = this.map {
+    Drink(it.tragoId, it.imagen, it.nombre, it.descripcion, it.hasAlcohol)
+}.toMutableList()
