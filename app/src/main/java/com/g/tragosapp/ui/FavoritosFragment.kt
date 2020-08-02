@@ -19,7 +19,6 @@ import com.g.tragosapp.data.model.DrinkEntity
 import com.g.tragosapp.domain.RepoImpl
 import com.g.tragosapp.domain.TragosDao
 import com.g.tragosapp.ui.viewmodel.MainViewModel
-import com.g.tragosapp.ui.viewmodel.VMFactory
 import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_favoritos.*
@@ -29,10 +28,6 @@ import javax.inject.Inject
 class FavoritosFragment : Fragment(),MainAdapter.OnTragoClickListener {
 
     private lateinit var adapter:MainAdapter
-
-    @Inject
-    lateinit var tragosDao: TragosDao
-
     private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +45,6 @@ class FavoritosFragment : Fragment(),MainAdapter.OnTragoClickListener {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupObservers()
-        Log.d("tragosDao", "onViewCreated: ${tragosDao.hashCode()}")
     }
 
     private fun setupObservers(){

@@ -33,6 +33,6 @@
     <fragment
         android:id="@+id/favoritosFragment"
         android:name="com.g.tragosapp.ui.FavoritosFragment"
-        android:label="fragment_favoritos"
+        android:label="Favoritos"
         tools:layout="@layout/fragment_favoritos" />
 </navigation>

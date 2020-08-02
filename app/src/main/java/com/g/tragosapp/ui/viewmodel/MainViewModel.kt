@@ -8,12 +8,13 @@ import com.g.tragosapp.domain.Repo
 import com.g.tragosapp.vo.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Created by Gastón Saillén on 03 July 2020
  */
 
-class MainViewModel @ViewModelInject constructor(private val repo:Repo):ViewModel(){
+class MainViewModel @ViewModelInject constructor (private val repo:Repo):ViewModel(){
 
     private val tragosData = MutableLiveData<String>()
 
