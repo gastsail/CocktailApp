@@ -1,7 +1,6 @@
-package com.g.tragosapp.ui
+package com.g.tragosapp.ui.favorites
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,23 +10,20 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.g.tragosapp.AppDatabase
 import com.g.tragosapp.R
-import com.g.tragosapp.data.DataSourceImpl
 import com.g.tragosapp.data.model.Drink
 import com.g.tragosapp.data.model.DrinkEntity
-import com.g.tragosapp.domain.RepoImpl
-import com.g.tragosapp.domain.TragosDao
+import com.g.tragosapp.ui.MainAdapter
 import com.g.tragosapp.ui.viewmodel.MainViewModel
 import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_favoritos.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavoritosFragment : Fragment(),MainAdapter.OnTragoClickListener {
+class FavoritosFragment : Fragment(),
+    MainAdapter.OnTragoClickListener {
 
-    private lateinit var adapter:MainAdapter
+    private lateinit var adapter: MainAdapter
     private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +52,11 @@ class FavoritosFragment : Fragment(),MainAdapter.OnTragoClickListener {
                         Drink(it.tragoId,it.imagen,it.nombre,it.descripcion,it.hasAlcohol)
                     }.toMutableList()
 
-                    adapter = MainAdapter(requireContext(), lista,this)
+                    adapter = MainAdapter(
+                        requireContext(),
+                        lista,
+                        this
+                    )
                     rv_tragos_favoritos.adapter = adapter
                 }
                 is Resource.Failure -> {

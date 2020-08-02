@@ -1,4 +1,4 @@
-package com.g.tragosapp.domain
+package com.g.tragosapp.data
 
 import com.g.tragosapp.data.model.Drink
 import com.g.tragosapp.data.model.DrinkEntity

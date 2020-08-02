@@ -1,4 +1,4 @@
-package com.g.tragosapp
+package com.g.tragosapp.base
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

@@ -27,12 +27,12 @@
     </fragment>
     <fragment
         android:id="@+id/tragosDetalleFragment"
-        android:name="com.g.tragosapp.ui.TragosDetalleFragment"
+        android:name="com.g.tragosapp.ui.cocktaildetails.TragosDetalleFragment"
         android:label="Detalles"
         tools:layout="@layout/fragment_tragos_detalle" />
     <fragment
         android:id="@+id/favoritosFragment"
-        android:name="com.g.tragosapp.ui.FavoritosFragment"
+        android:name="com.g.tragosapp.ui.favorites.FavoritosFragment"
         android:label="Favoritos"
         tools:layout="@layout/fragment_favoritos" />
 </navigation>

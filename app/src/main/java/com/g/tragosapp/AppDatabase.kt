@@ -1,11 +1,9 @@
 package com.g.tragosapp
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.g.tragosapp.data.model.DrinkEntity
-import com.g.tragosapp.domain.TragosDao
+import com.g.tragosapp.domain.service.TragosDao
 
 /**
  * Created by Gastón Saillén on 07 July 2020
