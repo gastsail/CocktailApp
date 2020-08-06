@@ -18,6 +18,7 @@ class MainViewModel @ViewModelInject constructor (private val repo:Repo):ViewMod
 
     private val tragosData = MutableLiveData<String>()
 
+
     fun setTrago(tragoName:String){
         tragosData.value = tragoName
     }
@@ -26,8 +27,9 @@ class MainViewModel @ViewModelInject constructor (private val repo:Repo):ViewMod
         setTrago("margarita")
     }
 
+
     val fetchTragosList = tragosData.distinctUntilChanged().switchMap { nombreTrago ->
-        liveData(Dispatchers.IO) {
+        liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading())
             try{
                 emit(repo.getTragosList(nombreTrago))
@@ -43,7 +45,7 @@ class MainViewModel @ViewModelInject constructor (private val repo:Repo):ViewMod
         }
     }
 
-    fun getTragosFavoritos() = liveData(Dispatchers.IO) {
+    val getTragosFavoritos = liveData(Dispatchers.IO) {
         emit(Resource.Loading())
         try{
             emit(repo.getTragosFavoritos())

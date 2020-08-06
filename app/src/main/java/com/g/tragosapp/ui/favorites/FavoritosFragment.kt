@@ -41,7 +41,7 @@ class FavoritosFragment : Fragment(),
     }
 
     private fun setupObservers(){
-        viewModel.getTragosFavoritos().observe(viewLifecycleOwner, Observer { result->
+        viewModel.getTragosFavoritos.observe(viewLifecycleOwner, Observer { result->
             when(result){
                 is Resource.Loading -> {}
                 is Resource.Success -> {
