@@ -18,6 +18,10 @@ This is a clean architecture app example built with
 ![Test Image 4](https://i.imgur.com/Lsqjego.png)
 ![Test Image 4](https://i.imgur.com/VKatXbv.png)
 
+# Support 😄
+
+If this repo helped you , you can join the [stargazers](https://github.com/gastsail/TragosApp/stargazers) for this repo ⭐
+
 
 
 
