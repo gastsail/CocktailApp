@@ -15,7 +15,7 @@ class RepoImpl @Inject constructor(private val dataSource: DataSource): Repo {
         return dataSource.getTragoByName(nombreTrago)
     }
 
-    override suspend fun getTragosFavoritos(): Resource<List<DrinkEntity>> {
+    override suspend fun getTragosFavoritos(): Resource<MutableList<Drink>> {
         return dataSource.getTragosFavoritos()
     }
 

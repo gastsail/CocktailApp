@@ -45,7 +45,7 @@ class FavoritosFragment : Fragment(),
             when(result){
                 is Resource.Loading -> {}
                 is Resource.Success -> {
-                    val lista = result.data.asDrinkList()
+                    val lista = result.data
 
                     adapter = MainAdapter(
                         requireContext(),

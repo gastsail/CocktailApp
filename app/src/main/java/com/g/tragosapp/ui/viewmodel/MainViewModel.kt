@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.g.tragosapp.data.model.Drink
 import com.g.tragosapp.data.model.DrinkEntity
+import com.g.tragosapp.data.model.asDrinkList
 import com.g.tragosapp.domain.Repo
 import com.g.tragosapp.vo.Resource
 import kotlinx.coroutines.Dispatchers
@@ -39,11 +40,13 @@ class MainViewModel @ViewModelInject constructor (private val repo:Repo):ViewMod
         }
     }
 
+
     fun guardarTrago(trago:DrinkEntity){
         viewModelScope.launch {
             repo.insertTrago(trago)
         }
     }
+
 
     val getTragosFavoritos = liveData(Dispatchers.IO) {
         emit(Resource.Loading())
