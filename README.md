@@ -1,4 +1,4 @@
-# TragosApp
+# CocktailApp
 This is a clean architecture app example built with
 
 - Coroutines
