@@ -26,7 +26,6 @@ class MainAdapter(private val context: Context, private val tragosList: MutableL
     fun deleteDrink(position: Int){
         tragosList.removeAt(position)
         notifyItemRemoved(position)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {

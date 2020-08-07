@@ -12,7 +12,7 @@ import javax.inject.Inject
 class RepoImpl @Inject constructor(private val dataSource: DataSource): Repo {
 
     override suspend fun getTragosList(nombreTrago:String): Resource<List<Drink>> {
-        return dataSource.getTragoByName(nombreTrago)
+        return dataSource.getTragoByName(nombreTrago)!!
     }
 
     override suspend fun getTragosFavoritos(): Resource<MutableList<Drink>> {

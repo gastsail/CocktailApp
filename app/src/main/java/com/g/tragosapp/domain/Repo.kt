@@ -8,7 +8,7 @@ import com.g.tragosapp.vo.Resource
  * Created by Gastón Saillén on 03 July 2020
  */
 interface Repo {
-    suspend fun getTragosList(nombreTrago:String): Resource<List<Drink>>
+    suspend fun getTragosList(nombreTrago:String): Resource<List<Drink>>?
     suspend fun getTragosFavoritos(): Resource<MutableList<Drink>>
     suspend fun insertTrago(trago:DrinkEntity)
     suspend fun deleteDrink(drink: DrinkEntity)

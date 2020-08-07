@@ -18,6 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <include android:id="@+id/empty_container"
+        android:visibility="gone"
+        layout="@layout/empty_container"/>
+
     <RelativeLayout
         android:id="@+id/progressBar"
         android:layout_width="match_parent"

@@ -24,8 +24,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
 
 @AndroidEntryPoint
-class MainFragment : Fragment(),MainAdapter.OnTragoClickListener {
-    
+class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
+
     private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreateView(
@@ -45,26 +45,36 @@ class MainFragment : Fragment(),MainAdapter.OnTragoClickListener {
         }
     }
 
-    private fun setupObservers(){
+    private fun setupObservers() {
         viewModel.fetchTragosList.observe(viewLifecycleOwner, Observer { result ->
-            when(result){
+            when (result) {
                 is Resource.Loading -> {
+                    empty_container.visibility = View.GONE
                     progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
                     progressBar.visibility = View.GONE
-                    rv_tragos.adapter = MainAdapter(requireContext(), result.data.toMutableList(),this)
+                    if (result.data.toMutableList().isEmpty()) {
+                        empty_container.visibility = View.VISIBLE
+                        return@Observer
+                    }
+                    empty_container.visibility = View.GONE
+                    rv_tragos.adapter = MainAdapter(requireContext(), result.data.toMutableList(), this)
                 }
                 is Resource.Failure -> {
                     progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Ocurrió un error al traer los datos ${result.exception}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Ocurrió un error al traer los datos ${result.exception}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         })
     }
 
-    private fun setupSearchView(){
-        searchView.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
+    private fun setupSearchView() {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.setTrago(query!!)
                 return false
@@ -76,14 +86,19 @@ class MainFragment : Fragment(),MainAdapter.OnTragoClickListener {
         })
     }
 
-    override fun onTragoClick(drink: Drink,position:Int) {
+    override fun onTragoClick(drink: Drink, position: Int) {
         val bundle = Bundle()
-        bundle.putParcelable("drink",drink)
-        findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment,bundle)
+        bundle.putParcelable("drink", drink)
+        findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment, bundle)
     }
 
-    private fun setupRecyclerView(){
+    private fun setupRecyclerView() {
         rv_tragos.layoutManager = LinearLayoutManager(requireContext())
-        rv_tragos.addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL))
+        rv_tragos.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
     }
 }
