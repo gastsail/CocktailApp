@@ -15,8 +15,9 @@ This is a clean architecture app example built with
 
 # Images
 
-![Test Image 4](https://i.imgur.com/Lsqjego.png)
-![Test Image 4](https://i.imgur.com/VKatXbv.png)
+![Test Image 4](https://i.imgur.com/8aufX1F.png)
+![Test Image 4](https://i.imgur.com/2xHoJZF.png)
+![Test Image 4](https://i.imgur.com/8nGR2aN.png)
 
 # Support 😄
 
