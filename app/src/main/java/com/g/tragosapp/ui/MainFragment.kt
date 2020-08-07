@@ -2,10 +2,8 @@ package com.g.tragosapp.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
@@ -28,6 +26,11 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
     private val viewModel by activityViewModels<MainViewModel>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,9 +43,6 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         setupRecyclerView()
         setupSearchView()
         setupObservers()
-        btn_ir_favoritos.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_favoritosFragment)
-        }
     }
 
     private fun setupObservers() {
@@ -84,6 +84,21 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
                 return false
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main_menu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.favoritos -> {
+                findNavController().navigate(R.id.action_mainFragment_to_favoritosFragment)
+                false
+            }
+            else -> false
+        }
     }
 
     override fun onTragoClick(drink: Drink, position: Int) {

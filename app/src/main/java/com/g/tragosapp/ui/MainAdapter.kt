@@ -25,6 +25,7 @@ class MainAdapter(private val context: Context, private val tragosList: MutableL
 
     fun deleteDrink(position: Int){
         tragosList.removeAt(position)
+        notifyDataSetChanged()
         notifyItemRemoved(position)
     }
 
