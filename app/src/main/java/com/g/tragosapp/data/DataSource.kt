@@ -10,6 +10,6 @@ import com.g.tragosapp.vo.Resource
 interface DataSource {
     suspend fun getTragoByName(nombreTrago: String): Resource<List<Drink>>?
     suspend fun insertTragoIntoRoom(trago: DrinkEntity)
-    suspend fun getTragosFavoritos(): Resource<MutableList<Drink>>
+    suspend fun getTragosFavoritos(): Resource<List<Drink>>
     suspend fun deleteDrink(drink: DrinkEntity)
 }

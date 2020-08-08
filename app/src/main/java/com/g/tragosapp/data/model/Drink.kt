@@ -50,3 +50,5 @@ data class DrinkEntity(
 fun List<DrinkEntity>.asDrinkList(): MutableList<Drink> = this.map {
     Drink(it.tragoId, it.imagen, it.nombre, it.descripcion, it.hasAlcohol)
 }.toMutableList()
+
+fun Drink.asDrinkEntity(): DrinkEntity = DrinkEntity(this.tragoId,this.imagen,this.nombre,this.descripcion,this.hasAlcohol)

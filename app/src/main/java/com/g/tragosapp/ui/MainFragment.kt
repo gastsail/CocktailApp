@@ -25,10 +25,12 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
     private val viewModel by activityViewModels<MainViewModel>()
+    private lateinit var mainAdapter:MainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        mainAdapter = MainAdapter(requireContext(), this)
     }
 
     override fun onCreateView(
@@ -54,12 +56,12 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
                 }
                 is Resource.Success -> {
                     progressBar.visibility = View.GONE
-                    if (result.data.toMutableList().isEmpty()) {
+                    if (result.data.isEmpty()) {
                         empty_container.visibility = View.VISIBLE
                         return@Observer
                     }
+                    mainAdapter.setCocktailList(result.data)
                     empty_container.visibility = View.GONE
-                    rv_tragos.adapter = MainAdapter(requireContext(), result.data.toMutableList(), this)
                 }
                 is Resource.Failure -> {
                     progressBar.visibility = View.GONE
@@ -101,7 +103,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         }
     }
 
-    override fun onTragoClick(drink: Drink, position: Int) {
+    override fun onCocktailClick(drink: Drink, position: Int) {
         val bundle = Bundle()
         bundle.putParcelable("drink", drink)
         findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment, bundle)
@@ -115,5 +117,6 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
                 DividerItemDecoration.VERTICAL
             )
         )
+        rv_tragos.adapter = mainAdapter
     }
 }

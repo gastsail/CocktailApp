@@ -10,6 +10,7 @@ import com.g.tragosapp.vo.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.coroutineContext
 
 /**
  * Created by Gastón Saillén on 03 July 2020
@@ -57,9 +58,12 @@ class MainViewModel @ViewModelInject constructor (private val repo:Repo):ViewMod
         }
     }
 
-    fun deleteDrink(drink: DrinkEntity) {
-        viewModelScope.launch {
-            repo.deleteDrink(drink)
+    fun deleteDrink(drink: DrinkEntity) = liveData(viewModelScope.coroutineContext + Dispatchers.IO)  {
+        emit(Resource.Loading())
+        try{
+            emit(repo.deleteDrink(drink))
+        }catch (e: Exception){
+            emit(Resource.Failure(e))
         }
     }
 }

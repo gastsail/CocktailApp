@@ -1,4 +1,4 @@
-package com.g.tragosapp.ui
+package com.g.tragosapp.ui.favorites
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,19 +9,22 @@ import com.bumptech.glide.Glide
 import com.g.tragosapp.R
 import com.g.tragosapp.base.BaseViewHolder
 import com.g.tragosapp.data.model.Drink
+import com.g.tragosapp.data.model.DrinkEntity
+import com.g.tragosapp.data.model.asDrinkEntity
 import kotlinx.android.synthetic.main.tragos_row.view.*
 
 /**
- * Created by Gastón Saillén on 03 July 2020
+ * Created by Gastón Saillén on 08 August 2020
  */
-
-class MainAdapter(private val context: Context,private val itemClickLister:OnTragoClickListener) :
+class FavoritesAdapter(private val context: Context,
+                  private val itemClickLister:OnCocktailClickListener) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     private var cocktailList = listOf<Drink>()
 
-    interface OnTragoClickListener{
+    interface OnCocktailClickListener{
         fun onCocktailClick(drink: Drink, position:Int)
+        fun onCocktailDeleteLongClick(drink: DrinkEntity, position:Int)
     }
 
     fun setCocktailList(cocktailList:List<Drink>){
@@ -36,7 +39,7 @@ class MainAdapter(private val context: Context,private val itemClickLister:OnTra
     }
 
     override fun getItemCount(): Int {
-        return cocktailList .size
+        return cocktailList.size
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
@@ -50,7 +53,15 @@ class MainAdapter(private val context: Context,private val itemClickLister:OnTra
             Glide.with(context).load(item.imagen).centerCrop().into(itemView.img_trago)
             itemView.txt_titulo.text = item.nombre
             itemView.txt_descripcion.text = item.descripcion
-            itemView.setOnClickListener { itemClickLister.onCocktailClick(item,position) }
+
+            itemView.setOnLongClickListener {
+                itemClickLister.onCocktailDeleteLongClick(item.asDrinkEntity(),position)
+                return@setOnLongClickListener true
+            }
+
+            itemView.setOnClickListener {
+                itemClickLister.onCocktailClick(item,position)
+            }
         }
     }
 }

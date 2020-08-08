@@ -34,5 +34,14 @@
         android:id="@+id/favoritosFragment"
         android:name="com.g.tragosapp.ui.favorites.FavoritosFragment"
         android:label="Favoritos"
-        tools:layout="@layout/fragment_favoritos" />
+        tools:layout="@layout/fragment_favoritos" >
+        <action
+            android:id="@+id/action_favoritosFragment_to_tragosDetalleFragment"
+            app:destination="@id/tragosDetalleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/favoritosFragment" />
+    </fragment>
 </navigation>

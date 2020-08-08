@@ -1,9 +1,11 @@
 package com.g.tragosapp.domain
 
+import androidx.lifecycle.liveData
 import com.g.tragosapp.data.DataSource
 import com.g.tragosapp.data.model.Drink
 import com.g.tragosapp.data.model.DrinkEntity
 import com.g.tragosapp.vo.Resource
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 /**
@@ -15,7 +17,7 @@ class RepoImpl @Inject constructor(private val dataSource: DataSource): Repo {
         return dataSource.getTragoByName(nombreTrago)!!
     }
 
-    override suspend fun getTragosFavoritos(): Resource<MutableList<Drink>> {
+    override suspend fun getTragosFavoritos(): Resource<List<Drink>> {
         return dataSource.getTragosFavoritos()
     }
 
@@ -23,7 +25,8 @@ class RepoImpl @Inject constructor(private val dataSource: DataSource): Repo {
         dataSource.insertTragoIntoRoom(trago)
     }
 
-    override suspend fun deleteDrink(drink: DrinkEntity) {
+    override suspend fun deleteDrink(drink: DrinkEntity): Resource<List<Drink>> {
         dataSource.deleteDrink(drink)
+        return getTragosFavoritos()
     }
 }
