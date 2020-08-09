@@ -1,7 +1,6 @@
 package com.g.tragosapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.SearchView
@@ -11,11 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.g.tragosapp.AppDatabase
 import com.g.tragosapp.R
-import com.g.tragosapp.data.DataSourceImpl
 import com.g.tragosapp.data.model.Drink
-import com.g.tragosapp.domain.RepoImpl
 import com.g.tragosapp.ui.viewmodel.MainViewModel
 import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,7 +44,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
     }
 
     private fun setupObservers() {
-        viewModel.fetchTragosList.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.fetchCocktailList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loading -> {
                     empty_container.visibility = View.GONE
@@ -78,7 +74,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
     private fun setupSearchView() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.setTrago(query!!)
+                viewModel.setCocktail(query!!)
                 return false
             }
 

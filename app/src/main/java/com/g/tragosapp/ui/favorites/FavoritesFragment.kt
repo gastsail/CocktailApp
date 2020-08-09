@@ -14,15 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.g.tragosapp.R
 import com.g.tragosapp.data.model.Drink
 import com.g.tragosapp.data.model.DrinkEntity
-import com.g.tragosapp.data.model.asDrinkEntity
-import com.g.tragosapp.ui.MainAdapter
 import com.g.tragosapp.ui.viewmodel.MainViewModel
 import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_favoritos.*
 
 @AndroidEntryPoint
-class FavoritosFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
+class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
 
     private val viewModel by activityViewModels<MainViewModel>()
     private lateinit var favoritesAdapter:FavoritesAdapter
@@ -46,7 +44,7 @@ class FavoritosFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
     }
 
     private fun setupObservers(){
-        viewModel.getTragosFavoritos().observe(viewLifecycleOwner, Observer { result->
+        viewModel.getFavoriteCocktails().observe(viewLifecycleOwner, Observer { result->
             when(result){
                 is Resource.Loading -> {}
                 is Resource.Success -> {
@@ -76,7 +74,7 @@ class FavoritosFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
     }
 
     override fun onCocktailDeleteLongClick(drink: DrinkEntity, position: Int) {
-        viewModel.deleteDrink(drink).observe(viewLifecycleOwner, Observer { result ->
+        viewModel.deleteCocktail(drink).observe(viewLifecycleOwner, Observer { result ->
             when(result){
                 is Resource.Loading -> { }
                 is Resource.Success -> {

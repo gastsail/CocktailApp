@@ -3,7 +3,7 @@ package com.g.tragosapp.data
 import com.g.tragosapp.data.model.Drink
 import com.g.tragosapp.data.model.DrinkEntity
 import com.g.tragosapp.data.model.asDrinkList
-import com.g.tragosapp.domain.service.TragosDao
+import com.g.tragosapp.domain.service.CocktailDao
 import com.g.tragosapp.domain.service.WebService
 import com.g.tragosapp.vo.Resource
 import javax.inject.Inject
@@ -12,23 +12,23 @@ import javax.inject.Inject
  * Created by Gastón Saillén on 03 July 2020
  */
 class DataSourceImpl @Inject constructor(
-    private val tragosDao: TragosDao,
+    private val cocktailDao: CocktailDao,
     private val webService: WebService
 ) : DataSource {
 
-    override suspend fun getTragoByName(nombreTrago: String): Resource<List<Drink>> {
-        return Resource.Success(webService.getTragoByName(nombreTrago)?.drinksList?: listOf())
+    override suspend fun getCocktailByName(nombreTrago: String): Resource<List<Drink>> {
+        return Resource.Success(webService.getCocktailByName(nombreTrago)?.drinksList?: listOf())
     }
 
-    override suspend fun insertTragoIntoRoom(trago: DrinkEntity) {
-        tragosDao.insertFavorite(trago)
+    override suspend fun insertCocktailIntoRoom(trago: DrinkEntity) {
+        cocktailDao.insertFavorite(trago)
     }
 
-    override suspend fun getTragosFavoritos(): Resource<List<Drink>> {
-        return Resource.Success(tragosDao.getAllFavoriteDrinks().asDrinkList())
+    override suspend fun getFavoritesCocktails(): Resource<List<Drink>> {
+        return Resource.Success(cocktailDao.getAllFavoriteDrinks().asDrinkList())
     }
 
-    override suspend fun deleteDrink(drink: DrinkEntity) {
-        tragosDao.deleteDrink(drink)
+    override suspend fun deleteCocktail(drink: DrinkEntity) {
+        cocktailDao.deleteCoktail(drink)
     }
 }

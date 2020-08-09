@@ -8,8 +8,8 @@ import com.g.tragosapp.vo.Resource
  * Created by Gastón Saillén on 16 July 2020
  */
 interface DataSource {
-    suspend fun getTragoByName(nombreTrago: String): Resource<List<Drink>>?
-    suspend fun insertTragoIntoRoom(trago: DrinkEntity)
-    suspend fun getTragosFavoritos(): Resource<List<Drink>>
-    suspend fun deleteDrink(drink: DrinkEntity)
+    suspend fun getCocktailByName(nombreTrago: String): Resource<List<Drink>>?
+    suspend fun insertCocktailIntoRoom(trago: DrinkEntity)
+    suspend fun getFavoritesCocktails(): Resource<List<Drink>>
+    suspend fun deleteCocktail(drink: DrinkEntity)
 }

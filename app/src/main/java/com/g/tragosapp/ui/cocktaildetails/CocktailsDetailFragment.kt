@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_tragos_detalle.*
 
 @AndroidEntryPoint
-class TragosDetalleFragment : Fragment() {
+class CocktailsDetailFragment : Fragment() {
 
     private val viewModel by activityViewModels<MainViewModel>()
     private lateinit var drink: Drink
@@ -37,13 +37,13 @@ class TragosDetalleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Glide.with(requireContext()).load(drink.imagen).centerCrop().into(img_trago)
-        trago_title.text = drink.nombre
-        trago_desc.text = drink.descripcion
+        Glide.with(requireContext()).load(drink.image).centerCrop().into(img_cocktail)
+        cocktail_title.text = drink.name
+        cocktail_desc.text = drink.description
 
-        btn_guardar_trago.setOnClickListener {
-            viewModel.guardarTrago(DrinkEntity(drink.tragoId,drink.imagen,drink.nombre,drink.descripcion,drink.hasAlcohol))
-            Toast.makeText(requireContext(), "Se guardó el trago a favoritos", Toast.LENGTH_SHORT)
+        btn_save_cocktail.setOnClickListener {
+            viewModel.saveCocktail(DrinkEntity(drink.cocktailId,drink.image,drink.name,drink.description,drink.hasAlcohol))
+            Toast.makeText(requireContext(), "Cocktail saved to favorites", Toast.LENGTH_SHORT)
                 .show()
         }
     }

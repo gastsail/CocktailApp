@@ -32,11 +32,11 @@ object AppModule {
         context,
         AppDatabase::class.java,
         TABLE_NAME
-    ).build()
+    ).fallbackToDestructiveMigration().build()
 
     @Singleton
     @Provides
-    fun provideTragosDao(db: AppDatabase) = db.tragoDao()
+    fun provideTragosDao(db: AppDatabase) = db.cocktailDao()
 
     @Singleton
     @Provides

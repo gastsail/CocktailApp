@@ -1,7 +1,6 @@
 package com.g.tragosapp.data.model
 
 import android.os.Parcelable
-import org.jetbrains.annotations.Nullable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -15,13 +14,13 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Drink(
     @SerializedName("idDrink")
-    val tragoId:String = "",
+    val cocktailId:String = "",
     @SerializedName("strDrinkThumb")
-    val imagen: String = "",
+    val image: String = "",
     @SerializedName("strDrink")
-    val nombre: String = "",
+    val name: String = "",
     @SerializedName("strInstructions")
-    val descripcion: String = "",
+    val description: String = "",
     @SerializedName("strAlcoholic")
     val hasAlcohol:String = "Non_Alcoholic"
 ):Parcelable
@@ -36,19 +35,19 @@ data class DrinkList(
 @Entity(tableName = "tragosEntity")
 data class DrinkEntity(
     @PrimaryKey
-    val tragoId: String,
+    val cocktailId: String,
     @ColumnInfo(name = "trago_imagen")
-    val imagen: String = "",
+    val image: String = "",
     @ColumnInfo(name = "trago_nombre")
-    val nombre: String = "",
+    val name: String = "",
     @ColumnInfo(name = "trago_descripcion")
-    val descripcion: String = "",
+    val description: String = "",
     @ColumnInfo(name = "trago_has_alcohol")
     val hasAlcohol:String = "Non_Alcoholic"
 )
 
 fun List<DrinkEntity>.asDrinkList(): MutableList<Drink> = this.map {
-    Drink(it.tragoId, it.imagen, it.nombre, it.descripcion, it.hasAlcohol)
+    Drink(it.cocktailId, it.image, it.name, it.description, it.hasAlcohol)
 }.toMutableList()
 
-fun Drink.asDrinkEntity(): DrinkEntity = DrinkEntity(this.tragoId,this.imagen,this.nombre,this.descripcion,this.hasAlcohol)
+fun Drink.asDrinkEntity(): DrinkEntity = DrinkEntity(this.cocktailId,this.image,this.name,this.description,this.hasAlcohol)

@@ -50,9 +50,9 @@ class FavoritesAdapter(private val context: Context,
 
     private inner class MainViewHolder(itemView: View) : BaseViewHolder<Drink>(itemView) {
         override fun bind(item: Drink, position: Int) {
-            Glide.with(context).load(item.imagen).centerCrop().into(itemView.img_trago)
-            itemView.txt_titulo.text = item.nombre
-            itemView.txt_descripcion.text = item.descripcion
+            Glide.with(context).load(item.image).centerCrop().into(itemView.img_cocktail)
+            itemView.txt_titulo.text = item.name
+            itemView.txt_descripcion.text = item.description
 
             itemView.setOnLongClickListener {
                 itemClickLister.onCocktailDeleteLongClick(item.asDrinkEntity(),position)

@@ -2,15 +2,11 @@ package com.g.tragosapp.ui.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.g.tragosapp.data.model.Drink
 import com.g.tragosapp.data.model.DrinkEntity
-import com.g.tragosapp.data.model.asDrinkList
 import com.g.tragosapp.domain.Repo
 import com.g.tragosapp.vo.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 /**
  * Created by Gastón Saillén on 03 July 2020
@@ -18,23 +14,23 @@ import kotlin.coroutines.coroutineContext
 
 class MainViewModel @ViewModelInject constructor (private val repo:Repo):ViewModel(){
 
-    private val tragosData = MutableLiveData<String>()
+    private val mutableCocktailName = MutableLiveData<String>()
 
 
-    fun setTrago(tragoName:String){
-        tragosData.value = tragoName
+    fun setCocktail(cocktailName:String){
+        mutableCocktailName.value = cocktailName
     }
 
     init {
-        setTrago("margarita")
+        setCocktail("margarita")
     }
 
 
-    val fetchTragosList = tragosData.distinctUntilChanged().switchMap { nombreTrago ->
+    val fetchCocktailList = mutableCocktailName.distinctUntilChanged().switchMap { cocktailName ->
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading())
             try{
-                emit(repo.getTragosList(nombreTrago))
+                emit(repo.getCocktailList(cocktailName))
             }catch (e: Exception){
                 emit(Resource.Failure(e))
             }
@@ -42,26 +38,26 @@ class MainViewModel @ViewModelInject constructor (private val repo:Repo):ViewMod
     }
 
 
-    fun guardarTrago(trago:DrinkEntity){
+    fun saveCocktail(cocktail:DrinkEntity){
         viewModelScope.launch {
-            repo.insertTrago(trago)
+            repo.insertCocktail(cocktail)
         }
     }
 
 
-    fun getTragosFavoritos() = liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+    fun getFavoriteCocktails() = liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
         emit(Resource.Loading())
         try{
-            emit(repo.getTragosFavoritos())
+            emit(repo.getFavoriteCocktails())
         }catch (e: Exception){
             emit(Resource.Failure(e))
         }
     }
 
-    fun deleteDrink(drink: DrinkEntity) = liveData(viewModelScope.coroutineContext + Dispatchers.IO)  {
+    fun deleteCocktail(cocktail: DrinkEntity) = liveData(viewModelScope.coroutineContext + Dispatchers.IO)  {
         emit(Resource.Loading())
         try{
-            emit(repo.deleteDrink(drink))
+            emit(repo.deleteCocktail(cocktail))
         }catch (e: Exception){
             emit(Resource.Failure(e))
         }
