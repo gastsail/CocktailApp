@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.g.tragosapp.ui.MainFragment"
-        android:label="Tragos"
+        android:label="Cocktails"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_tragosDetalleFragment"
@@ -28,13 +28,13 @@
     <fragment
         android:id="@+id/tragosDetalleFragment"
         android:name="com.g.tragosapp.ui.cocktaildetails.CocktailsDetailFragment"
-        android:label="Detalles"
+        android:label="Details"
         tools:layout="@layout/fragment_tragos_detalle" />
     <fragment
         android:id="@+id/favoritosFragment"
         android:name="com.g.tragosapp.ui.favorites.FavoritesFragment"
-        android:label="Favoritos"
-        tools:layout="@layout/fragment_favoritos" >
+        android:label="My Favorites"
+        tools:layout="@layout/fragment_favoritos">
         <action
             android:id="@+id/action_favoritosFragment_to_tragosDetalleFragment"
             app:destination="@id/tragosDetalleFragment"

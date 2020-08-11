@@ -6,6 +6,7 @@ import com.g.tragosapp.data.model.FavoritesEntity
 import com.g.tragosapp.domain.Repo
 import com.g.tragosapp.vo.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
@@ -30,8 +31,9 @@ class MainViewModel @ViewModelInject constructor (private val repo:Repo):ViewMod
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading())
             try{
-                emit(repo.getCachedCocktails(cocktailName))
-                emit(repo.getCocktailList(cocktailName))
+                repo.getCocktailList(cocktailName).collect {
+                    emit(it)
+                }
             }catch (e: Exception){
                 emit(Resource.Failure(e))
             }
