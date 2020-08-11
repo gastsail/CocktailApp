@@ -8,6 +8,7 @@ This is a clean architecture app example built with
 - Retrofit
 - Room
 - Navigation Components
+- Cache Strategy
 
 # Architecture
 
