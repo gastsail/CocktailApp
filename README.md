@@ -9,6 +9,7 @@ This is a clean architecture app example built with
 - Room
 - Navigation Components
 - Cache Strategy
+- Coroutines Flow
 
 # Architecture
 
