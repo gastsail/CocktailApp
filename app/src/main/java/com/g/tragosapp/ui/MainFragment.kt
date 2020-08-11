@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.g.tragosapp.R
-import com.g.tragosapp.data.model.Drink
+import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.ui.viewmodel.MainViewModel
 import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -99,9 +99,9 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         }
     }
 
-    override fun onCocktailClick(drink: Drink, position: Int) {
+    override fun onCocktailClick(cocktail: Cocktail, position: Int) {
         val bundle = Bundle()
-        bundle.putParcelable("drink", drink)
+        bundle.putParcelable("drink", cocktail)
         findNavController().navigate(R.id.action_mainFragment_to_tragosDetalleFragment, bundle)
     }
 

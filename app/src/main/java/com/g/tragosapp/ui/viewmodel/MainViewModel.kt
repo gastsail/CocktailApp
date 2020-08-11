@@ -2,7 +2,7 @@ package com.g.tragosapp.ui.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.g.tragosapp.data.model.DrinkEntity
+import com.g.tragosapp.data.model.FavoritesEntity
 import com.g.tragosapp.domain.Repo
 import com.g.tragosapp.vo.Resource
 import kotlinx.coroutines.Dispatchers
@@ -30,6 +30,7 @@ class MainViewModel @ViewModelInject constructor (private val repo:Repo):ViewMod
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading())
             try{
+                emit(repo.getCachedCocktails(cocktailName))
                 emit(repo.getCocktailList(cocktailName))
             }catch (e: Exception){
                 emit(Resource.Failure(e))
@@ -38,9 +39,9 @@ class MainViewModel @ViewModelInject constructor (private val repo:Repo):ViewMod
     }
 
 
-    fun saveCocktail(cocktail:DrinkEntity){
+    fun saveCocktail(cocktail:FavoritesEntity){
         viewModelScope.launch {
-            repo.insertCocktail(cocktail)
+            repo.saveCocktail(cocktail)
         }
     }
 
@@ -54,7 +55,7 @@ class MainViewModel @ViewModelInject constructor (private val repo:Repo):ViewMod
         }
     }
 
-    fun deleteCocktail(cocktail: DrinkEntity) = liveData(viewModelScope.coroutineContext + Dispatchers.IO)  {
+    fun deleteCocktail(cocktail: FavoritesEntity) = liveData(viewModelScope.coroutineContext + Dispatchers.IO)  {
         emit(Resource.Loading())
         try{
             emit(repo.deleteCocktail(cocktail))

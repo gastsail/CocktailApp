@@ -12,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.g.tragosapp.R
-import com.g.tragosapp.data.model.Drink
-import com.g.tragosapp.data.model.DrinkEntity
+import com.g.tragosapp.data.model.Cocktail
+import com.g.tragosapp.data.model.FavoritesEntity
 import com.g.tragosapp.ui.viewmodel.MainViewModel
 import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,14 +67,14 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
         rv_tragos_favoritos.adapter = favoritesAdapter
     }
 
-    override fun onCocktailClick(drink: Drink, position: Int) {
+    override fun onCocktailClick(cocktail: Cocktail, position: Int) {
         val bundle = Bundle()
-        bundle.putParcelable("drink", drink)
+        bundle.putParcelable("drink", cocktail)
         findNavController().navigate(R.id.action_favoritosFragment_to_tragosDetalleFragment, bundle)
     }
 
-    override fun onCocktailDeleteLongClick(drink: DrinkEntity, position: Int) {
-        viewModel.deleteCocktail(drink).observe(viewLifecycleOwner, Observer { result ->
+    override fun onCocktailDeleteLongClick(favorites: FavoritesEntity, position: Int) {
+        viewModel.deleteCocktail(favorites).observe(viewLifecycleOwner, Observer { result ->
             when(result){
                 is Resource.Loading -> { }
                 is Resource.Success -> {

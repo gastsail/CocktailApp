@@ -3,7 +3,7 @@ package com.g.tragosapp.di
 import android.content.Context
 import androidx.room.Room
 import com.g.tragosapp.AppDatabase
-import com.g.tragosapp.domain.service.WebService
+import com.g.tragosapp.domain.remote.WebService
 import com.g.tragosapp.utils.AppConstants.BASE_URL
 import com.g.tragosapp.utils.AppConstants.TABLE_NAME
 import com.google.gson.GsonBuilder
