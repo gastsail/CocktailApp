@@ -22,6 +22,8 @@ This is a clean architecture app example built with
 ![Test Image 4](https://i.imgur.com/2xHoJZF.png)
 ![Test Image 4](https://i.imgur.com/8nGR2aN.png)
 
+Project purpose is architecture not UI, feel free to do a PR to change it
+
 # Support 😄
 
 If this repo helped you , you can join the [stargazers](https://github.com/gastsail/TragosApp/stargazers) for this repo ⭐
