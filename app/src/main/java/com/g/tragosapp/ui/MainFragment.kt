@@ -12,14 +12,18 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.g.tragosapp.R
 import com.g.tragosapp.data.model.Cocktail
+import com.g.tragosapp.databinding.FragmentMainBinding
 import com.g.tragosapp.ui.viewmodel.MainViewModel
 import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_main.*
 
 @AndroidEntryPoint
 class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
+    private var _binding: FragmentMainBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
     private val viewModel by activityViewModels<MainViewModel>()
     private lateinit var mainAdapter:MainAdapter
 
@@ -33,7 +37,8 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        _binding = FragmentMainBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,20 +52,20 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         viewModel.fetchCocktailList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loading -> {
-                    empty_container.visibility = View.GONE
-                    progressBar.visibility = View.VISIBLE
+                    binding.emptyContainer.root.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
-                    progressBar.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
                     if (result.data.isEmpty()) {
-                        empty_container.visibility = View.VISIBLE
+                        binding.emptyContainer.root.visibility = View.VISIBLE
                         return@Observer
                     }
                     mainAdapter.setCocktailList(result.data)
-                    empty_container.visibility = View.GONE
+                    binding.emptyContainer.root.visibility = View.GONE
                 }
                 is Resource.Failure -> {
-                    progressBar.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
                     Toast.makeText(
                         requireContext(),
                         "Ocurrió un error al traer los datos ${result.exception}",
@@ -72,7 +77,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
     }
 
     private fun setupSearchView() {
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.setCocktail(query!!)
                 return false
@@ -106,13 +111,18 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
     }
 
     private fun setupRecyclerView() {
-        rv_tragos.layoutManager = LinearLayoutManager(requireContext())
-        rv_tragos.addItemDecoration(
+        binding.rvTragos.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvTragos.addItemDecoration(
             DividerItemDecoration(
                 requireContext(),
                 DividerItemDecoration.VERTICAL
             )
         )
-        rv_tragos.adapter = mainAdapter
+        binding.rvTragos.adapter = mainAdapter
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

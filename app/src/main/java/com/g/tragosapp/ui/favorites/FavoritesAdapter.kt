@@ -2,16 +2,14 @@ package com.g.tragosapp.ui.favorites
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.g.tragosapp.R
 import com.g.tragosapp.base.BaseViewHolder
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.data.model.FavoritesEntity
 import com.g.tragosapp.data.model.asFavoriteEntity
-import kotlinx.android.synthetic.main.tragos_row.view.*
+import com.g.tragosapp.databinding.TragosRowBinding
 
 /**
  * Created by Gastón Saillén on 08 August 2020
@@ -33,9 +31,8 @@ class FavoritesAdapter(private val context: Context,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
-        return MainViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.tragos_row, parent, false)
-        )
+        val itemBinding = TragosRowBinding.inflate(LayoutInflater.from(context), parent, false)
+        return MainViewHolder(itemBinding)
     }
 
     override fun getItemCount(): Int {
@@ -48,20 +45,21 @@ class FavoritesAdapter(private val context: Context,
         }
     }
 
-    private inner class MainViewHolder(itemView: View) : BaseViewHolder<Cocktail>(itemView) {
-        override fun bind(item: Cocktail, position: Int) {
-            Glide.with(context).load(item.image).centerCrop().into(itemView.img_cocktail)
-            itemView.txt_titulo.text = item.name
-            itemView.txt_descripcion.text = item.description
+    private inner class MainViewHolder(private val binding: TragosRowBinding) : BaseViewHolder<Cocktail>(binding.root) {
+        override fun bind(item: Cocktail, position: Int) = with(binding) {
+            Glide.with(context).load(item.image).centerCrop().into(imgCocktail)
+            txtTitulo.text = item.name
+            txtDescripcion.text = item.description
 
-            itemView.setOnLongClickListener {
-                itemClickLister.onCocktailDeleteLongClick(item.asFavoriteEntity(),position)
+            root.setOnLongClickListener {
+                itemClickLister.onCocktailDeleteLongClick(item.asFavoriteEntity(), position)
                 return@setOnLongClickListener true
             }
 
-            itemView.setOnClickListener {
-                itemClickLister.onCocktailClick(item,position)
+            root.setOnClickListener {
+                itemClickLister.onCocktailClick(item, position)
             }
+
         }
     }
 }

@@ -2,14 +2,12 @@ package com.g.tragosapp.ui
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.g.tragosapp.R
 import com.g.tragosapp.base.BaseViewHolder
 import com.g.tragosapp.data.model.Cocktail
-import kotlinx.android.synthetic.main.tragos_row.view.*
+import com.g.tragosapp.databinding.TragosRowBinding
 
 /**
  * Created by Gastón Saillén on 03 July 2020
@@ -30,9 +28,8 @@ class MainAdapter(private val context: Context,private val itemClickLister:OnTra
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
-        return MainViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.tragos_row, parent, false)
-        )
+        val itemBinding = TragosRowBinding.inflate(LayoutInflater.from(context), parent, false)
+        return MainViewHolder(itemBinding)
     }
 
     override fun getItemCount(): Int {
@@ -45,12 +42,12 @@ class MainAdapter(private val context: Context,private val itemClickLister:OnTra
         }
     }
 
-    private inner class MainViewHolder(itemView: View) : BaseViewHolder<Cocktail>(itemView) {
-        override fun bind(item: Cocktail, position: Int) {
-            Glide.with(context).load(item.image).centerCrop().into(itemView.img_cocktail)
-            itemView.txt_titulo.text = item.name
-            itemView.txt_descripcion.text = item.description
-            itemView.setOnClickListener { itemClickLister.onCocktailClick(item,position) }
+    private inner class MainViewHolder(val binding: TragosRowBinding) : BaseViewHolder<Cocktail>(binding.root) {
+        override fun bind(item: Cocktail, position: Int) = with(binding) {
+            Glide.with(context).load(item.image).centerCrop().into(imgCocktail)
+            txtTitulo.text = item.name
+            txtDescripcion.text = item.description
+            root.setOnClickListener { itemClickLister.onCocktailClick(item,position) }
         }
     }
 }

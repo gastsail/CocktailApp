@@ -8,15 +8,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
-import com.g.tragosapp.R
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.data.model.FavoritesEntity
+import com.g.tragosapp.databinding.FragmentTragosDetalleBinding
 import com.g.tragosapp.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_tragos_detalle.*
 
 @AndroidEntryPoint
 class CocktailsDetailFragment : Fragment() {
+
+    private var _binding: FragmentTragosDetalleBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     private val viewModel by activityViewModels<MainViewModel>()
     private lateinit var cocktail: Cocktail
@@ -32,19 +36,25 @@ class CocktailsDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_tragos_detalle, container, false)
+        _binding = FragmentTragosDetalleBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Glide.with(requireContext()).load(cocktail.image).centerCrop().into(img_cocktail)
-        cocktail_title.text = cocktail.name
-        cocktail_desc.text = cocktail.description
+        Glide.with(requireContext()).load(cocktail.image).centerCrop().into(binding.imgCocktail)
+        binding.cocktailTitle.text = cocktail.name
+        binding.cocktailDesc.text = cocktail.description
 
-        btn_save_cocktail.setOnClickListener {
+        binding.btnSaveCocktail.setOnClickListener {
             viewModel.saveCocktail(FavoritesEntity(cocktail.cocktailId,cocktail.image,cocktail.name,cocktail.description,cocktail.hasAlcohol))
             Toast.makeText(requireContext(), "Cocktail saved to favorites", Toast.LENGTH_SHORT)
                 .show()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

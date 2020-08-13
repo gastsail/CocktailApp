@@ -14,13 +14,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.g.tragosapp.R
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.data.model.FavoritesEntity
+import com.g.tragosapp.databinding.FavoriteFragmentBinding
 import com.g.tragosapp.ui.viewmodel.MainViewModel
 import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_favoritos.*
 
 @AndroidEntryPoint
 class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
+
+    private var _binding: FavoriteFragmentBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     private val viewModel by activityViewModels<MainViewModel>()
     private lateinit var favoritesAdapter:FavoritesAdapter
@@ -34,7 +39,8 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_favoritos, container, false)
+        _binding = FavoriteFragmentBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,9 +68,9 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
     }
 
     private fun setupRecyclerView(){
-        rv_tragos_favoritos.layoutManager = LinearLayoutManager(requireContext())
-        rv_tragos_favoritos.addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL))
-        rv_tragos_favoritos.adapter = favoritesAdapter
+        binding.rvTragosFavoritos.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvTragosFavoritos.addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL))
+        binding.rvTragosFavoritos.adapter = favoritesAdapter
     }
 
     override fun onCocktailClick(cocktail: Cocktail, position: Int) {
@@ -90,5 +96,10 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
                 }
             }
         })
+    }
+    
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

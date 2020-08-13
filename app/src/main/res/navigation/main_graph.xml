@@ -34,7 +34,7 @@
         android:id="@+id/favoritosFragment"
         android:name="com.g.tragosapp.ui.favorites.FavoritesFragment"
         android:label="My Favorites"
-        tools:layout="@layout/fragment_favoritos">
+        tools:layout="@layout/favorite_fragment">
         <action
             android:id="@+id/action_favoritosFragment_to_tragosDetalleFragment"
             app:destination="@id/tragosDetalleFragment"

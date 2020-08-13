@@ -10,14 +10,23 @@
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/img_cocktail"
         android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+        android:layout_height="300dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:padding="4dp"
+        android:orientation="horizontal">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_save_cocktail"
-            android:src="@drawable/ic_baseline_save_24"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_baseline_save_24" />
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/cocktail_title"
@@ -26,12 +35,14 @@
         android:gravity="center"
         android:textSize="25sp"
         android:textStyle="bold"
-        tools:text= "Margarita Blue"/>
+        tools:text="Margarita Blue" />
 
     <TextView
         android:id="@+id/cocktail_desc"
-        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:textSize="15sp" />
 
 </LinearLayout>
