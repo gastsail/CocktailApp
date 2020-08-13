@@ -13,7 +13,7 @@ This is a clean architecture app example built with
 
 # Architecture
 
-![Test Image 4](https://github.com/AnDevCba/GitHubMVP/raw/master/images/architecture_android.png)
+![Test Image 4](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
 
 # Images
 
