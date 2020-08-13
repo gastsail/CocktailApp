@@ -10,6 +10,7 @@ This is a clean architecture app example built with
 - Navigation Components
 - Cache Strategy
 - Coroutines Flow
+- ViewBinding
 
 # Architecture
 
