@@ -54,6 +54,10 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
             when(result){
                 is Resource.Loading -> {}
                 is Resource.Success -> {
+                    if (result.data.isEmpty()) {
+                        binding.emptyContainer.root.visibility = View.VISIBLE
+                        return@Observer
+                    }
                     favoritesAdapter.setCocktailList(result.data)
                 }
                 is Resource.Failure -> {
@@ -84,6 +88,10 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
             when(result){
                 is Resource.Loading -> { }
                 is Resource.Success -> {
+                    if (result.data.isEmpty()) {
+                        binding.emptyContainer.root.visibility = View.VISIBLE
+                        return@Observer
+                    }
                     Toast.makeText(requireContext(), "Drink deleted !", Toast.LENGTH_SHORT).show()
                     favoritesAdapter.setCocktailList(result.data)
                 }
