@@ -8,7 +8,7 @@ This is a clean architecture app example built with
 - Retrofit
 - Room
 - Navigation Components
-- Cache Strategy
+- Cache Strategy (Repository Pattern)
 - Coroutines Flow
 - ViewBinding
 
