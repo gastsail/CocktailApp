@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -14,6 +13,7 @@ import com.g.tragosapp.R
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.databinding.FragmentMainBinding
 import com.g.tragosapp.ui.viewmodel.MainViewModel
+import com.g.tragosapp.utils.shortToast
 import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -66,11 +66,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
                 }
                 is Resource.Failure -> {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(
-                        requireContext(),
-                        "Ocurrió un error al traer los datos ${result.exception}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    context?.shortToast("Ocurrió un error al traer los datos ${result.exception}")
                 }
             }
         })

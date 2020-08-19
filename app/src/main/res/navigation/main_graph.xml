@@ -29,7 +29,12 @@
         android:id="@+id/tragosDetalleFragment"
         android:name="com.g.tragosapp.ui.cocktaildetails.CocktailsDetailFragment"
         android:label="Details"
-        tools:layout="@layout/fragment_tragos_detalle" />
+        tools:layout="@layout/fragment_tragos_detalle" >
+        <action
+            android:id="@+id/action_tragosDetalleFragment_self"
+            app:destination="@id/tragosDetalleFragment"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
         android:name="com.g.tragosapp.ui.favorites.FavoritesFragment"

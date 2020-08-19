@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,6 +15,7 @@ import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.data.model.FavoritesEntity
 import com.g.tragosapp.databinding.FavoriteFragmentBinding
 import com.g.tragosapp.ui.viewmodel.MainViewModel
+import com.g.tragosapp.utils.shortToast
 import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -61,11 +61,7 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
                     favoritesAdapter.setCocktailList(result.data)
                 }
                 is Resource.Failure -> {
-                    Toast.makeText(
-                        requireContext(),
-                        "An error occurred ${result.exception}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    context?.shortToast("An error occurred ${result.exception}")
                 }
             }
         })
@@ -92,15 +88,11 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
                         binding.emptyContainer.root.visibility = View.VISIBLE
                         return@Observer
                     }
-                    Toast.makeText(requireContext(), "Drink deleted !", Toast.LENGTH_SHORT).show()
+                    context?.shortToast("Drink deleted !")
                     favoritesAdapter.setCocktailList(result.data)
                 }
                 is Resource.Failure -> {
-                    Toast.makeText(
-                        requireContext(),
-                        "An error occurred ${result.exception}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    context?.shortToast("An error occurred ${result.exception}")
                 }
             }
         })
