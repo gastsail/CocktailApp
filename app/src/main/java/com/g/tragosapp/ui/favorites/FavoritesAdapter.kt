@@ -6,66 +6,71 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.DiffResult.NO_POSITION
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.g.tragosapp.base.BaseViewHolder
 import com.g.tragosapp.data.model.Cocktail
-import com.g.tragosapp.data.model.FavoritesEntity
-import com.g.tragosapp.data.model.asFavoriteEntity
 import com.g.tragosapp.databinding.TragosRowBinding
+import com.g.tragosapp.utils.BaseViewHolder
 
 /**
  * Created by Gastón Saillén on 08 August 2020
  */
-class FavoritesAdapter(private val context: Context,
-                  private val itemClickLister:OnCocktailClickListener) :
-    RecyclerView.Adapter<BaseViewHolder<*>>() {
+class FavoritesAdapter(
+    private val context: Context,
+    private val itemClickListener: OnCocktailClickListener
+) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     private var cocktailList = listOf<Cocktail>()
 
-    interface OnCocktailClickListener{
-        fun onCocktailClick(cocktail: Cocktail, position:Int)
-        fun onCocktailDeleteLongClick(favorites: FavoritesEntity, position:Int)
+    interface OnCocktailClickListener {
+        fun onCocktailClick(cocktail: Cocktail, position: Int)
+
+        fun onCocktailLongClick(cocktail: Cocktail, position: Int)
     }
 
-    fun setCocktailList(cocktailList:List<Cocktail>){
+    fun setCocktailList(cocktailList: List<Cocktail>) {
         this.cocktailList = cocktailList
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         val itemBinding = TragosRowBinding.inflate(LayoutInflater.from(context), parent, false)
-        val vh = MainViewHolder(itemBinding)
+        val holder = MainViewHolder(itemBinding)
 
-        vh.itemView.setOnClickListener {
-            val pos = vh.adapterPosition
-            if(pos != NO_POSITION){
-                itemClickLister.onCocktailClick(cocktailList[pos],pos)
-            }
+        holder.itemView.setOnClickListener {
+            val position = holder.adapterPosition.takeIf { it != NO_POSITION }
+                ?: return@setOnClickListener
+
+            itemClickListener.onCocktailClick(cocktailList[position], position)
         }
 
-        vh.itemView.setOnLongClickListener {
-            val pos = vh.adapterPosition
-            if(pos != NO_POSITION){
-                itemClickLister.onCocktailDeleteLongClick(cocktailList[pos].asFavoriteEntity(),pos)
-            }
+        holder.itemView.setOnLongClickListener {
+            val position = holder.adapterPosition.takeIf { it != NO_POSITION }
+                ?: return@setOnLongClickListener true
+
+            itemClickListener.onCocktailLongClick(cocktailList[position], position)
+
             return@setOnLongClickListener true
         }
 
-        return vh
+        return holder
     }
 
-    override fun getItemCount(): Int {
-        return cocktailList.size
-    }
+    override fun getItemCount(): Int = cocktailList.size
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
         when (holder) {
-            is MainViewHolder -> holder.bind(cocktailList[position], position)
+            is MainViewHolder -> holder.bind(cocktailList[position])
         }
     }
 
-    private inner class MainViewHolder(private val binding: TragosRowBinding) : BaseViewHolder<Cocktail>(binding.root) {
-        override fun bind(item: Cocktail, position: Int) = with(binding) {
-            Glide.with(context).load(item.image).centerCrop().into(imgCocktail)
+    private inner class MainViewHolder(
+        private val binding: TragosRowBinding
+    ) : BaseViewHolder<Cocktail>(binding.root) {
+        override fun bind(item: Cocktail) = with(binding) {
+            Glide.with(context)
+                .load(item.image)
+                .centerCrop()
+                .into(imgCocktail)
+
             txtTitulo.text = item.name
             txtDescripcion.text = item.description
         }

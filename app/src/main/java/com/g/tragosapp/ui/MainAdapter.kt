@@ -6,53 +6,61 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.DiffResult.NO_POSITION
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.g.tragosapp.base.BaseViewHolder
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.databinding.TragosRowBinding
+import com.g.tragosapp.utils.BaseViewHolder
 
 /**
  * Created by Gastón Saillén on 03 July 2020
  */
 
-class MainAdapter(private val context: Context,private val itemClickLister:OnTragoClickListener) :
-    RecyclerView.Adapter<BaseViewHolder<*>>() {
+class MainAdapter(
+    private val context: Context,
+    private val itemClickListener: OnTragoClickListener
+) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     private var cocktailList = listOf<Cocktail>()
 
-    interface OnTragoClickListener{
-        fun onCocktailClick(cocktail: Cocktail, position:Int)
+    interface OnTragoClickListener {
+        fun onCocktailClick(cocktail: Cocktail, position: Int)
     }
 
-    fun setCocktailList(cocktailList:List<Cocktail>){
+    fun setCocktailList(cocktailList: List<Cocktail>) {
         this.cocktailList = cocktailList
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         val itemBinding = TragosRowBinding.inflate(LayoutInflater.from(context), parent, false)
-        val vh = MainViewHolder(itemBinding)
-        vh.itemView.setOnClickListener {
-            val pos = vh.adapterPosition
-            if(pos != NO_POSITION){
-                itemClickLister.onCocktailClick(cocktailList[pos],pos)
-            }
+
+        val holder = MainViewHolder(itemBinding)
+
+        itemBinding.root.setOnClickListener {
+            val position =
+                holder.adapterPosition.takeIf { it != NO_POSITION } ?: return@setOnClickListener
+            itemClickListener.onCocktailClick(cocktailList[position], position)
         }
-        return vh
+
+        return holder
     }
 
-    override fun getItemCount(): Int {
-        return cocktailList .size
-    }
+    override fun getItemCount(): Int = cocktailList.size
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
         when (holder) {
-            is MainViewHolder -> holder.bind(cocktailList[position], position)
+            is MainViewHolder -> holder.bind(cocktailList[position])
         }
     }
 
-    private inner class MainViewHolder(val binding: TragosRowBinding) : BaseViewHolder<Cocktail>(binding.root) {
-        override fun bind(item: Cocktail, position: Int) = with(binding) {
-            Glide.with(context).load(item.image).centerCrop().into(imgCocktail)
+    private inner class MainViewHolder(
+        val binding: TragosRowBinding
+    ) : BaseViewHolder<Cocktail>(binding.root) {
+        override fun bind(item: Cocktail) = with(binding) {
+            Glide.with(context)
+                .load(item.image)
+                .centerCrop()
+                .into(imgCocktail)
+
             txtTitulo.text = item.name
             txtDescripcion.text = item.description
         }

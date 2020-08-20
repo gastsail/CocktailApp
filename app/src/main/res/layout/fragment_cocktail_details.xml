@@ -20,11 +20,10 @@
         android:orientation="horizontal">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_save_cocktail"
+            android:id="@+id/btn_save_or_delete_cocktail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_baseline_save_24" />
+            android:layout_marginEnd="16dp" />
     </LinearLayout>
 
 
