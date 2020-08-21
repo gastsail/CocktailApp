@@ -1,11 +1,11 @@
-package com.g.tragosapp.di
+package com.g.tragosapp.application.injection
 
 import android.content.Context
 import androidx.room.Room
-import com.g.tragosapp.data.AppDatabase
+import com.g.tragosapp.application.AppConstants.BASE_URL
+import com.g.tragosapp.application.AppConstants.DATABASE_NAME
+import com.g.tragosapp.data.local.AppDatabase
 import com.g.tragosapp.data.remote.WebService
-import com.g.tragosapp.utils.AppConstants.BASE_URL
-import com.g.tragosapp.utils.AppConstants.TABLE_NAME
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -31,7 +31,7 @@ object AppModule {
     ) = Room.databaseBuilder(
         context,
         AppDatabase::class.java,
-        TABLE_NAME
+        DATABASE_NAME
     ).fallbackToDestructiveMigration().build()
 
     @Singleton

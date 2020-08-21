@@ -1,12 +1,12 @@
 package com.g.tragosapp.data
 
 import androidx.lifecycle.LiveData
+import com.g.tragosapp.core.Resource
 import com.g.tragosapp.data.local.LocalDataSource
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.data.model.CocktailEntity
 import com.g.tragosapp.data.model.asCocktailEntity
 import com.g.tragosapp.data.remote.NetworkDataSource
-import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel

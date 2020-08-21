@@ -6,7 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.g.tragosapp.R
-import com.g.tragosapp.utils.observe
+import com.g.tragosapp.core.observe
 import com.g.tragosapp.utils.setOnQueryTextListener.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

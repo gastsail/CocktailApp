@@ -1,9 +1,9 @@
 package com.g.tragosapp.data
 
 import androidx.lifecycle.LiveData
+import com.g.tragosapp.core.Resource
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.data.model.CocktailEntity
-import com.g.tragosapp.vo.Resource
 import kotlinx.coroutines.flow.Flow
 
 /**

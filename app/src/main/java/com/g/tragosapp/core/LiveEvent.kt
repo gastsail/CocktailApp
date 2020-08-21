@@ -1,4 +1,4 @@
-package com.g.tragosapp.utils
+package com.g.tragosapp.core
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
