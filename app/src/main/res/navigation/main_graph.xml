@@ -16,7 +16,13 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right">
+
+            <argument
+                android:name="drink"
+                app:argType="com.g.tragosapp.data.model.Cocktail"
+                app:nullable="false" />
+        </action>
         <action
             android:id="@+id/action_mainFragment_to_favoritosFragment"
             app:destination="@id/favoritosFragment"
@@ -27,9 +33,15 @@
     </fragment>
     <fragment
         android:id="@+id/tragosDetalleFragment"
-        android:name="com.g.tragosapp.ui.cocktaildetails.CocktailsDetailFragment"
+        android:name="com.g.tragosapp.ui.cocktaildetails.CocktailDetailsFragment"
         android:label="Details"
-        tools:layout="@layout/fragment_tragos_detalle" />
+        tools:layout="@layout/fragment_cocktail_details">
+
+        <argument
+            android:name="drink"
+            app:argType="com.g.tragosapp.data.model.Cocktail"
+            app:nullable="false" />
+    </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
         android:name="com.g.tragosapp.ui.favorites.FavoritesFragment"
@@ -42,6 +54,12 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/favoritosFragment" />
+            app:popUpTo="@id/favoritosFragment">
+
+            <argument
+                android:name="drink"
+                app:argType="com.g.tragosapp.data.model.Cocktail"
+                app:nullable="false" />
+        </action>
     </fragment>
 </navigation>

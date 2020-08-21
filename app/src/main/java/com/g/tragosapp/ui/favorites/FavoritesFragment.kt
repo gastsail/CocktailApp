@@ -1,113 +1,74 @@
 package com.g.tragosapp.ui.favorites
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.g.tragosapp.R
 import com.g.tragosapp.data.model.Cocktail
-import com.g.tragosapp.data.model.FavoritesEntity
 import com.g.tragosapp.databinding.FavoriteFragmentBinding
-import com.g.tragosapp.ui.viewmodel.MainViewModel
+import com.g.tragosapp.ui.MainViewModel
+import com.g.tragosapp.utils.setOnQueryTextListener.show
+import com.g.tragosapp.utils.setOnQueryTextListener.showToast
 import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FavoritesFragment : Fragment(), FavoritesAdapter.OnCocktailClickListener{
-
-    private var _binding: FavoriteFragmentBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
+class FavoritesFragment : Fragment(R.layout.favorite_fragment),
+    FavoritesAdapter.OnCocktailClickListener {
     private val viewModel by activityViewModels<MainViewModel>()
-    private lateinit var favoritesAdapter:FavoritesAdapter
+    private lateinit var favoritesAdapter: FavoritesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        favoritesAdapter = FavoritesAdapter(requireContext(),this)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FavoriteFragmentBinding.inflate(inflater,container,false)
-        return binding.root
+        favoritesAdapter = FavoritesAdapter(requireContext(), this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
-        setupObservers()
-    }
 
-    private fun setupObservers(){
-        viewModel.getFavoriteCocktails().observe(viewLifecycleOwner, Observer { result->
-            when(result){
-                is Resource.Loading -> {}
+        val binding = FavoriteFragmentBinding.bind(view)
+
+        binding.rvTragosFavoritos.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvTragosFavoritos.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
+        binding.rvTragosFavoritos.adapter = favoritesAdapter
+
+        viewModel.getFavoriteCocktails().observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Resource.Loading -> {
+                }
                 is Resource.Success -> {
                     if (result.data.isEmpty()) {
-                        binding.emptyContainer.root.visibility = View.VISIBLE
-                        return@Observer
+                        binding.emptyContainer.root.show()
+                        return@observe
                     }
                     favoritesAdapter.setCocktailList(result.data)
                 }
                 is Resource.Failure -> {
-                    Toast.makeText(
-                        requireContext(),
-                        "An error occurred ${result.exception}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showToast("An error occurred ${result.exception}")
                 }
             }
-        })
-    }
-
-    private fun setupRecyclerView(){
-        binding.rvTragosFavoritos.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTragosFavoritos.addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL))
-        binding.rvTragosFavoritos.adapter = favoritesAdapter
+        }
     }
 
     override fun onCocktailClick(cocktail: Cocktail, position: Int) {
-        val bundle = Bundle()
-        bundle.putParcelable("drink", cocktail)
-        findNavController().navigate(R.id.action_favoritosFragment_to_tragosDetalleFragment, bundle)
+        findNavController().navigate(
+            FavoritesFragmentDirections.actionFavoritosFragmentToTragosDetalleFragment(
+                cocktail
+            )
+        )
     }
 
-    override fun onCocktailDeleteLongClick(favorites: FavoritesEntity, position: Int) {
-        viewModel.deleteCocktail(favorites).observe(viewLifecycleOwner, Observer { result ->
-            when(result){
-                is Resource.Loading -> { }
-                is Resource.Success -> {
-                    if (result.data.isEmpty()) {
-                        binding.emptyContainer.root.visibility = View.VISIBLE
-                        return@Observer
-                    }
-                    Toast.makeText(requireContext(), "Drink deleted !", Toast.LENGTH_SHORT).show()
-                    favoritesAdapter.setCocktailList(result.data)
-                }
-                is Resource.Failure -> {
-                    Toast.makeText(
-                        requireContext(),
-                        "An error occurred ${result.exception}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        })
-    }
-    
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    override fun onCocktailLongClick(cocktail: Cocktail, position: Int) {
+        viewModel.deleteFavoriteCocktail(cocktail)
     }
 }

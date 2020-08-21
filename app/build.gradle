@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
   compileSdkVersion 29
@@ -40,8 +41,8 @@ android {
 dependencies {
   implementation fileTree(dir: "libs", include: ["*.jar"])
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'androidx.core:core-ktx:1.3.0'
-  implementation 'androidx.appcompat:appcompat:1.1.0'
+  implementation 'androidx.core:core-ktx:1.3.1'
+  implementation 'androidx.appcompat:appcompat:1.2.0'
   implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
   //Navigation Components
@@ -54,7 +55,7 @@ dependencies {
 
   // KTX - Viewmodel Y Livedata
   implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-  implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha06"
+  implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha07"
 
   //utils
   implementation 'com.github.bumptech.glide:glide:4.11.0'
@@ -77,13 +78,15 @@ dependencies {
   kapt "androidx.room:room-compiler:2.2.5"
 
   //Hilt
-  implementation "com.google.dagger:hilt-android:2.28-alpha"
-  kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
-  implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01'
+  implementation "com.google.dagger:hilt-android:2.28.1-alpha"
+  kapt "com.google.dagger:hilt-android-compiler:2.28.1-alpha"
+  implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
   kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
 
+  //EventEmitter (one-off events)
+  implementation 'com.github.Zhuinden:event-emitter:1.1.0'
 
-  testImplementation 'junit:junit:4.12'
+  testImplementation 'junit:junit:4.13'
   androidTestImplementation 'androidx.test.ext:junit:1.1.1'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
