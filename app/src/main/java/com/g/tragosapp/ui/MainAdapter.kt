@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.DiffResult.NO_POSITION
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.g.tragosapp.core.BaseViewHolder
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.databinding.TragosRowBinding
-import com.g.tragosapp.utils.BaseViewHolder
 
 /**
  * Created by Gastón Saillén on 03 July 2020

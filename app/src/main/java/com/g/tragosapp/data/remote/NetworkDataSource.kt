@@ -1,7 +1,7 @@
 package com.g.tragosapp.data.remote
 
+import com.g.tragosapp.core.Resource
 import com.g.tragosapp.data.model.Cocktail
-import com.g.tragosapp.vo.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow

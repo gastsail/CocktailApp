@@ -2,8 +2,8 @@ package com.g.tragosapp.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
+import com.g.tragosapp.core.Resource
 import com.g.tragosapp.data.model.*
-import com.g.tragosapp.vo.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 

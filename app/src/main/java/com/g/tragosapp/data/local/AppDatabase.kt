@@ -1,8 +1,7 @@
-package com.g.tragosapp.data
+package com.g.tragosapp.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.g.tragosapp.data.local.CocktailDao
 import com.g.tragosapp.data.model.CocktailEntity
 import com.g.tragosapp.data.model.FavoritesEntity
 

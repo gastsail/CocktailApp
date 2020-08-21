@@ -12,10 +12,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.g.tragosapp.R
+import com.g.tragosapp.core.Resource
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.databinding.FragmentMainBinding
 import com.g.tragosapp.utils.setOnQueryTextListener.*
-import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -88,9 +88,7 @@ class MainFragment : Fragment(R.layout.fragment_main), MainAdapter.OnTragoClickL
 
     override fun onCocktailClick(cocktail: Cocktail, position: Int) {
         findNavController().navigate(
-            MainFragmentDirections.actionMainFragmentToTragosDetalleFragment(
-                cocktail
-            )
+            MainFragmentDirections.actionMainFragmentToTragosDetalleFragment(cocktail)
         )
     }
 }

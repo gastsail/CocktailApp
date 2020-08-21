@@ -9,12 +9,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.g.tragosapp.R
+import com.g.tragosapp.core.Resource
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.databinding.FavoriteFragmentBinding
 import com.g.tragosapp.ui.MainViewModel
 import com.g.tragosapp.utils.setOnQueryTextListener.show
 import com.g.tragosapp.utils.setOnQueryTextListener.showToast
-import com.g.tragosapp.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

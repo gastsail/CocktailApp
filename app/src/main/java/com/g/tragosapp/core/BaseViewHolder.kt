@@ -1,4 +1,4 @@
-package com.g.tragosapp.utils
+package com.g.tragosapp.core
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
