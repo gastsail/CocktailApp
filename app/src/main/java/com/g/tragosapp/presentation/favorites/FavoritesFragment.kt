@@ -1,4 +1,4 @@
-package com.g.tragosapp.ui.favorites
+package com.g.tragosapp.presentation.favorites
 
 import android.os.Bundle
 import android.view.View
@@ -12,9 +12,9 @@ import com.g.tragosapp.R
 import com.g.tragosapp.core.Resource
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.databinding.FavoriteFragmentBinding
-import com.g.tragosapp.ui.MainViewModel
-import com.g.tragosapp.utils.setOnQueryTextListener.show
-import com.g.tragosapp.utils.setOnQueryTextListener.showToast
+import com.g.tragosapp.presentation.MainViewModel
+import com.g.tragosapp.utils.show
+import com.g.tragosapp.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

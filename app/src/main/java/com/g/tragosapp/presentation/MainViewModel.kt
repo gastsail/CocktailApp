@@ -1,11 +1,11 @@
-package com.g.tragosapp.ui
+package com.g.tragosapp.presentation
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.g.tragosapp.application.ToastHelper
 import com.g.tragosapp.core.Resource
-import com.g.tragosapp.data.CocktailDataSource
+import com.g.tragosapp.domain.CocktailRepository
 import com.g.tragosapp.data.model.Cocktail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -16,12 +16,12 @@ import kotlinx.coroutines.launch
  */
 
 class MainViewModel @ViewModelInject constructor(
-    private val dataSource: CocktailDataSource,
+    private val repository: CocktailRepository,
     private val toastHelper: ToastHelper,
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    private val currentCocktailName =
-        savedStateHandle.getLiveData<String>("cocktailName", "margarita")
+
+    private val currentCocktailName = savedStateHandle.getLiveData<String>("cocktailName", "margarita")
 
     fun setCocktail(cocktailName: String) {
         currentCocktailName.value = cocktailName
@@ -31,7 +31,7 @@ class MainViewModel @ViewModelInject constructor(
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading())
             try {
-                dataSource.getCocktailByName(cocktailName).collect {
+                repository.getCocktailByName(cocktailName).collect {
                     emit(it)
                 }
             } catch (e: Exception) {
@@ -42,11 +42,11 @@ class MainViewModel @ViewModelInject constructor(
 
     fun saveOrDeleteFavoriteCocktail(cocktail: Cocktail) {
         viewModelScope.launch {
-            if (dataSource.isCocktailFavorite(cocktail)) {
-                dataSource.deleteFavoriteCocktail(cocktail)
+            if (repository.isCocktailFavorite(cocktail)) {
+                repository.deleteFavoriteCocktail(cocktail)
                 toastHelper.sendToast("Cocktail deleted from favorites")
             } else {
-                dataSource.saveFavoriteCocktail(cocktail)
+                repository.saveFavoriteCocktail(cocktail)
                 toastHelper.sendToast("Cocktail saved to favorites")
             }
         }
@@ -56,7 +56,7 @@ class MainViewModel @ViewModelInject constructor(
         liveData<Resource<List<Cocktail>>>(viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading())
             try {
-                emitSource(dataSource.getFavoritesCocktails().map { Resource.Success(it) })
+                emitSource(repository.getFavoritesCocktails().map { Resource.Success(it) })
             } catch (e: Exception) {
                 emit(Resource.Failure(e))
             }
@@ -64,11 +64,11 @@ class MainViewModel @ViewModelInject constructor(
 
     fun deleteFavoriteCocktail(cocktail: Cocktail) {
         viewModelScope.launch {
-            dataSource.deleteFavoriteCocktail(cocktail)
+            repository.deleteFavoriteCocktail(cocktail)
             toastHelper.sendToast("Cocktail deleted from favorites")
         }
     }
 
     suspend fun isCocktailFavorite(cocktail: Cocktail): Boolean =
-        dataSource.isCocktailFavorite(cocktail)
+        repository.isCocktailFavorite(cocktail)
 }

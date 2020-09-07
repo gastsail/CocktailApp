@@ -1,7 +1,7 @@
 package com.g.tragosapp.application.injection
 
-import com.g.tragosapp.data.CocktailDataSource
-import com.g.tragosapp.data.DefaultCocktailDataSource
+import com.g.tragosapp.domain.CocktailRepository
+import com.g.tragosapp.domain.DefaultCocktailRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -11,5 +11,5 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 @InstallIn(ActivityRetainedComponent::class)
 abstract class ActivityRetainedModule {
     @Binds
-    abstract fun dataSource(impl: DefaultCocktailDataSource): CocktailDataSource
+    abstract fun dataSource(impl: DefaultCocktailRepository): CocktailRepository
 }

@@ -7,15 +7,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.g.tragosapp.R
 import com.g.tragosapp.core.observe
-import com.g.tragosapp.utils.setOnQueryTextListener.showToast
+import com.g.tragosapp.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
     @Inject
     lateinit var toastHelper: ToastHelper
-
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {

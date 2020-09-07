@@ -1,4 +1,4 @@
-package com.g.tragosapp.data
+package com.g.tragosapp.domain
 
 import androidx.lifecycle.LiveData
 import com.g.tragosapp.core.Resource
@@ -22,10 +22,11 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @ActivityRetainedScoped
-class DefaultCocktailDataSource @Inject constructor(
+class DefaultCocktailRepository @Inject constructor(
     private val networkDataSource: NetworkDataSource,
     private val localDataSource: LocalDataSource
-) : CocktailDataSource {
+) : CocktailRepository {
+
     override suspend fun getCocktailByName(cocktailName: String): Flow<Resource<List<Cocktail>>> =
         callbackFlow {
 

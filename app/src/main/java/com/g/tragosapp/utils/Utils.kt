@@ -1,7 +1,5 @@
 package com.g.tragosapp.utils
 
-.setOnQueryTextListener
-
 import android.content.Context
 import android.view.View
 import android.widget.SearchView

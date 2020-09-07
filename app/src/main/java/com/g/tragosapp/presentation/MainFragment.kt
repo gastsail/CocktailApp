@@ -1,4 +1,4 @@
-package com.g.tragosapp.ui
+package com.g.tragosapp.presentation
 
 import android.os.Bundle
 import android.view.Menu
@@ -15,7 +15,7 @@ import com.g.tragosapp.R
 import com.g.tragosapp.core.Resource
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.databinding.FragmentMainBinding
-import com.g.tragosapp.utils.setOnQueryTextListener.*
+import com.g.tragosapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

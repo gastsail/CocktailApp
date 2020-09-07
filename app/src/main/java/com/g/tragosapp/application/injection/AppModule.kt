@@ -36,7 +36,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideTragosDao(db: AppDatabase) = db.cocktailDao()
+    fun provideCocktailDao(db: AppDatabase) = db.cocktailDao()
 
     @Singleton
     @Provides

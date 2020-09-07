@@ -1,4 +1,4 @@
-package com.g.tragosapp.ui.cocktaildetails
+package com.g.tragosapp.presentation.cocktaildetails
 
 import android.os.Bundle
 import android.view.View
@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.g.tragosapp.R
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.databinding.FragmentCocktailDetailsBinding
-import com.g.tragosapp.ui.MainViewModel
+import com.g.tragosapp.presentation.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

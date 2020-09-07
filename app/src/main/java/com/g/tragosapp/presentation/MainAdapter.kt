@@ -1,4 +1,4 @@
-package com.g.tragosapp.ui
+package com.g.tragosapp.presentation
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -36,8 +36,7 @@ class MainAdapter(
         val holder = MainViewHolder(itemBinding)
 
         itemBinding.root.setOnClickListener {
-            val position =
-                holder.adapterPosition.takeIf { it != NO_POSITION } ?: return@setOnClickListener
+            val position = holder.adapterPosition.takeIf { it != NO_POSITION } ?: return@setOnClickListener
             itemClickListener.onCocktailClick(cocktailList[position], position)
         }
 

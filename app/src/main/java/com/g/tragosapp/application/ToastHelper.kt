@@ -7,8 +7,8 @@ import javax.inject.Inject
 
 @ActivityRetainedScoped
 class ToastHelper @Inject constructor() {
-    private val toastEmitter: EventEmitter<String> = EventEmitter()
 
+    private val toastEmitter: EventEmitter<String> = EventEmitter()
     val toastMessages: EventSource<String> = toastEmitter
 
     fun sendToast(message: String) {
