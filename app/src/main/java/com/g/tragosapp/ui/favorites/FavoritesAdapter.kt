@@ -1,4 +1,4 @@
-package com.g.tragosapp.presentation.favorites
+package com.g.tragosapp.ui.favorites
 
 import android.content.Context
 import android.view.LayoutInflater

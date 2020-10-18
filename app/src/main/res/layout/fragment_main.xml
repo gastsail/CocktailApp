@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".presentation.MainFragment">
+    tools:context=".ui.MainFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout3"

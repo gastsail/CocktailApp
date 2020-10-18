@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.g.tragosapp.presentation.MainFragment"
+        android:name="com.g.tragosapp.ui.MainFragment"
         android:label="Cocktails"
         tools:layout="@layout/fragment_main">
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/tragosDetalleFragment"
-        android:name="com.g.tragosapp.presentation.cocktaildetails.CocktailDetailsFragment"
+        android:name="com.g.tragosapp.ui.cocktaildetails.CocktailDetailsFragment"
         android:label="Details"
         tools:layout="@layout/fragment_cocktail_details">
 
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritosFragment"
-        android:name="com.g.tragosapp.presentation.favorites.FavoritesFragment"
+        android:name="com.g.tragosapp.ui.favorites.FavoritesFragment"
         android:label="My Favorites"
         tools:layout="@layout/favorite_fragment">
         <action

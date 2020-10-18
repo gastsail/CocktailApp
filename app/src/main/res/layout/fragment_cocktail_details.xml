@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context=".presentation.MainFragment">
+    tools:context=".ui.MainFragment">
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/img_cocktail"

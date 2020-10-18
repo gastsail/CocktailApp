@@ -1,4 +1,4 @@
-package com.g.tragosapp.presentation.cocktaildetails
+package com.g.tragosapp.ui.cocktaildetails
 
 import android.os.Bundle
 import android.view.View

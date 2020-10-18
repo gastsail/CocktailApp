@@ -1,4 +1,4 @@
-package com.g.tragosapp.presentation
+package com.g.tragosapp.ui
 
 import android.content.Context
 import android.view.LayoutInflater

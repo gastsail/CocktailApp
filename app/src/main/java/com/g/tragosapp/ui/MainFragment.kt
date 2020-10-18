@@ -1,4 +1,4 @@
-package com.g.tragosapp.presentation
+package com.g.tragosapp.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -15,11 +15,13 @@ import com.g.tragosapp.R
 import com.g.tragosapp.core.Resource
 import com.g.tragosapp.data.model.Cocktail
 import com.g.tragosapp.databinding.FragmentMainBinding
+import com.g.tragosapp.presentation.MainViewModel
 import com.g.tragosapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : Fragment(R.layout.fragment_main), MainAdapter.OnTragoClickListener {
+class MainFragment : Fragment(R.layout.fragment_main),
+    MainAdapter.OnTragoClickListener {
     private val viewModel by activityViewModels<MainViewModel>()
     private lateinit var mainAdapter: MainAdapter
 
@@ -88,7 +90,9 @@ class MainFragment : Fragment(R.layout.fragment_main), MainAdapter.OnTragoClickL
 
     override fun onCocktailClick(cocktail: Cocktail, position: Int) {
         findNavController().navigate(
-            MainFragmentDirections.actionMainFragmentToTragosDetalleFragment(cocktail)
+            MainFragmentDirections.actionMainFragmentToTragosDetalleFragment(
+                cocktail
+            )
         )
     }
 }

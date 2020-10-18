@@ -1,4 +1,4 @@
-package com.g.tragosapp.presentation.favorites
+package com.g.tragosapp.ui.favorites
 
 import android.os.Bundle
 import android.view.View
