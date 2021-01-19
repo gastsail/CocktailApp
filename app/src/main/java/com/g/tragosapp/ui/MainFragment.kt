@@ -38,12 +38,6 @@ class MainFragment : Fragment(R.layout.fragment_main),
         val binding = FragmentMainBinding.bind(view)
 
         binding.rvTragos.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTragos.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                DividerItemDecoration.VERTICAL
-            )
-        )
         binding.rvTragos.adapter = mainAdapter
 
         binding.searchView.onQueryTextChanged {
