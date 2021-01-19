@@ -53,9 +53,11 @@ class MainFragment : Fragment(R.layout.fragment_main),
                 }
                 is Resource.Success -> {
                     if (result.data.isEmpty()) {
+                        binding.rvTragos.hide()
                         binding.emptyContainer.root.show()
                         return@observe
                     }
+                    binding.rvTragos.show()
                     mainAdapter.setCocktailList(result.data)
                     binding.emptyContainer.root.hide()
                 }
