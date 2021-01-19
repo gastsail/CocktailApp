@@ -13,7 +13,6 @@
         android:layout_marginHorizontal="@dimen/margin_normal"
         android:layout_marginVertical="@dimen/margin_small"
         app:cardCornerRadius="@dimen/search_view_radius"
-        app:layout_constraintBottom_toTopOf="@+id/rv_tragos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -54,6 +53,7 @@
         android:id="@+id/rv_tragos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
