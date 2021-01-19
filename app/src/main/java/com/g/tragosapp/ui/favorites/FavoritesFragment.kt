@@ -34,12 +34,6 @@ class FavoritesFragment : Fragment(R.layout.favorite_fragment),
         val binding = FavoriteFragmentBinding.bind(view)
 
         binding.rvTragosFavoritos.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTragosFavoritos.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                DividerItemDecoration.VERTICAL
-            )
-        )
         binding.rvTragosFavoritos.adapter = favoritesAdapter
 
         viewModel.getFavoriteCocktails().observe(viewLifecycleOwner) { result ->
