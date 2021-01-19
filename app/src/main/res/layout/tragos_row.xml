@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
+    android:layout_marginHorizontal="@dimen/margin_normal"
+    android:layout_marginVertical="@dimen/margin_small"
     android:orientation="horizontal"
-    android:padding="8dp"
-    app:cardCornerRadius="15dp"
-    app:cardElevation="8dp">
+    android:padding="@dimen/margin_small"
+    app:cardCornerRadius="@dimen/common_radius"
+    app:cardElevation="@dimen/common_elevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,12 +17,10 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/mcv_cocktail"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="14dp"
+            android:layout_width="@dimen/home_image_size"
+            android:layout_height="@dimen/home_image_size"
+            android:layout_margin="@dimen/margin_normal"
+            app:cardCornerRadius="@dimen/common_radius"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -40,10 +38,9 @@
             android:id="@+id/txt_titulo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginHorizontal="@dimen/margin_normal"
             android:maxLines="1"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size_normal"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/txt_descripcion"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +52,7 @@
             android:id="@+id/txt_descripcion"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="@dimen/margin_normal"
             android:ellipsize="end"
             android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="@+id/mcv_cocktail"

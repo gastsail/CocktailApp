@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+
+    <dimen name="common_radius">14dp</dimen>
+    <dimen name="common_elevation">8dp</dimen>
+    <dimen name="search_view_radius">20dp</dimen>
+
+    <dimen name="detail_image_size">300dp</dimen>
+    <dimen name="error_image_size">50dp</dimen>
+    <dimen name="home_image_size">80dp</dimen>
+
+    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_normal">20sp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
+</resources>
