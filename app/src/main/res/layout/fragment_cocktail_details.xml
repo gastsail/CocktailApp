@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:orientation="vertical"
     tools:context=".ui.MainFragment">
 
     <com.google.android.material.card.MaterialCardView
@@ -59,6 +57,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_save_or_delete_cocktail" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_save_or_delete_cocktail"
+        tools:text="@tools:sample/lorem/random"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

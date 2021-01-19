@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/margin_normal"
     android:layout_marginVertical="@dimen/margin_small"
-    android:orientation="horizontal"
     android:padding="@dimen/margin_small"
     app:cardCornerRadius="@dimen/common_radius"
     app:cardElevation="@dimen/common_elevation">
@@ -59,7 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/txt_titulo"
             app:layout_constraintTop_toBottomOf="@+id/txt_titulo"
-            tools:text="Margarita con ingredientes : vodka, soda, limon" />
+            tools:text="Margarita con ingredientes: vodka, soda, limon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
