@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.g.tragosapp.R
 import com.g.tragosapp.core.Resource
@@ -34,22 +33,16 @@ class FavoritesFragment : Fragment(R.layout.favorite_fragment),
         val binding = FavoriteFragmentBinding.bind(view)
 
         binding.rvTragosFavoritos.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTragosFavoritos.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                DividerItemDecoration.VERTICAL
-            )
-        )
         binding.rvTragosFavoritos.adapter = favoritesAdapter
 
-        viewModel.getFavoriteCocktails().observe(viewLifecycleOwner) { result ->
+        viewModel.getFavoriteCocktails().observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loading -> {
                 }
                 is Resource.Success -> {
                     if (result.data.isEmpty()) {
                         binding.emptyContainer.root.show()
-                        return@observe
+                        return@Observer
                     }
                     favoritesAdapter.setCocktailList(result.data)
                 }
@@ -57,7 +50,7 @@ class FavoritesFragment : Fragment(R.layout.favorite_fragment),
                     showToast("An error occurred ${result.exception}")
                 }
             }
-        }
+        })
     }
 
     override fun onCocktailClick(cocktail: Cocktail, position: Int) {

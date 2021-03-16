@@ -7,9 +7,8 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.g.tragosapp.R
 import com.g.tragosapp.core.Resource
@@ -38,19 +37,12 @@ class MainFragment : Fragment(R.layout.fragment_main),
         val binding = FragmentMainBinding.bind(view)
 
         binding.rvTragos.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTragos.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                DividerItemDecoration.VERTICAL
-            )
-        )
         binding.rvTragos.adapter = mainAdapter
 
         binding.searchView.onQueryTextChanged {
             viewModel.setCocktail(it)
         }
-
-        viewModel.fetchCocktailList.observe(viewLifecycleOwner) { result ->
+        viewModel.fetchCocktailList.observe(viewLifecycleOwner, Observer { result ->
             binding.progressBar.showIf { result is Resource.Loading }
 
             when (result) {
@@ -59,9 +51,11 @@ class MainFragment : Fragment(R.layout.fragment_main),
                 }
                 is Resource.Success -> {
                     if (result.data.isEmpty()) {
+                        binding.rvTragos.hide()
                         binding.emptyContainer.root.show()
-                        return@observe
+                        return@Observer
                     }
+                    binding.rvTragos.show()
                     mainAdapter.setCocktailList(result.data)
                     binding.emptyContainer.root.hide()
                 }
@@ -69,7 +63,7 @@ class MainFragment : Fragment(R.layout.fragment_main),
                     showToast("Ocurrió un error al traer los datos ${result.exception}")
                 }
             }
-        }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

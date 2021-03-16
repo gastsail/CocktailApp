@@ -6,15 +6,15 @@
     android:orientation="vertical"
     tools:context=".ui.favorites.FavoritesFragment">
 
-    <include android:id="@+id/empty_container"
-        android:visibility="gone"
-        layout="@layout/empty_container"/>
+    <include
+        android:id="@+id/empty_container"
+        layout="@layout/empty_container"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tragos_favoritos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
+        android:layout_height="match_parent"
+        tools:listitem="@layout/tragos_row" />
 
 </LinearLayout>

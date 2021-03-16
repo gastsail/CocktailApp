@@ -1,40 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:padding="8dp"
-    android:orientation="horizontal">
+    android:layout_marginHorizontal="@dimen/margin_normal"
+    android:layout_marginVertical="@dimen/margin_small"
+    android:padding="@dimen/margin_small"
+    app:cardCornerRadius="@dimen/common_radius"
+    app:cardElevation="@dimen/common_elevation">
 
-    <ImageView
-        android:id="@+id/img_cocktail"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@mipmap/ic_launcher"/>
-
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcv_cocktail"
+            android:layout_width="@dimen/home_image_size"
+            android:layout_height="@dimen/home_image_size"
+            android:layout_margin="@dimen/margin_normal"
+            app:cardCornerRadius="@dimen/common_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_cocktail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher"
+                tools:ignore="ContentDescription" />
+
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/txt_titulo"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:maxLines="1"
+            android:textSize="@dimen/text_size_normal"
             android:textStyle="bold"
-            tools:text="Margarita"/>
+            app:layout_constraintBottom_toTopOf="@+id/txt_descripcion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/mcv_cocktail"
+            app:layout_constraintTop_toTopOf="@+id/mcv_cocktail"
+            tools:text="Margarita" />
 
         <TextView
             android:id="@+id/txt_descripcion"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/margin_normal"
             android:ellipsize="end"
             android:maxLines="2"
-            tools:text="Margarita con ingredientes : vodka, soda, limon"/>
+            app:layout_constraintBottom_toBottomOf="@+id/mcv_cocktail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/txt_titulo"
+            app:layout_constraintTop_toBottomOf="@+id/txt_titulo"
+            tools:text="Margarita con ingredientes: vodka, soda, limon" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

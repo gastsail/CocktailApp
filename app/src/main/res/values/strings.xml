@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CocktailApp</string>
+    <string name="search_no_results">No cocktails found</string>
 </resources>

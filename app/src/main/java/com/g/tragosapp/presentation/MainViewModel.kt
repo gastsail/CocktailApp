@@ -29,7 +29,7 @@ class MainViewModel @ViewModelInject constructor(
 
     val fetchCocktailList = currentCocktailName.distinctUntilChanged().switchMap { cocktailName ->
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
-            emit(Resource.Loading())
+            emit(Resource.Loading)
             try {
                 repository.getCocktailByName(cocktailName).collect {
                     emit(it)
@@ -54,7 +54,7 @@ class MainViewModel @ViewModelInject constructor(
 
     fun getFavoriteCocktails() =
         liveData<Resource<List<Cocktail>>>(viewModelScope.coroutineContext + Dispatchers.IO) {
-            emit(Resource.Loading())
+            emit(Resource.Loading)
             try {
                 emitSource(repository.getFavoritesCocktails().map { Resource.Success(it) })
             } catch (e: Exception) {

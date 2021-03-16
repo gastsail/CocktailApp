@@ -16,11 +16,12 @@ This is a clean architecture app example built with
 
 ![Test Image 4](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
 
-# Images
-
-![Test Image 4](https://i.imgur.com/8aufX1F.png)
-![Test Image 4](https://i.imgur.com/2xHoJZF.png)
-![Test Image 4](https://i.imgur.com/8nGR2aN.png)
+# Screenshots
+| Main Screen | Detail |  Favs |
+|:-:|:-:|:-:|
+| ![Fist](screenshots/light_1.png?raw=true) | ![3](screenshots/light_2.png?raw=true) | ![3](screenshots/light_3.png?raw=true) |
+| Main Screen Dark | Detail Dark |  Favs Dark |
+| ![4](screenshots/dark_1.png?raw=true) | ![5](screenshots/dark_2.png?raw=true) | ![6](screenshots/dark_3.png?raw=true) |
 
 Project purpose is architecture not UI, feel free to do a PR to change it
 
