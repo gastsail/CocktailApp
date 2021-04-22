@@ -16,7 +16,7 @@ import org.junit.Assert.*
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
   @Test
-  fun useAppContext() {
+  fun testUseAppContext() {
     // Context of the app under test.
     val appContext = InstrumentationRegistry.getInstrumentation().targetContext
     assertEquals("com.g.tragosapp", appContext.packageName)
