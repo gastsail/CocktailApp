@@ -28,25 +28,37 @@ class AppDatabaseTest {
     fun setUp() {
         database = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
-            AppDatabase::class.java)
+            AppDatabase::class.java
+        )
             .allowMainThreadQueries().build()
+
     }
 
     @ExperimentalCoroutinesApi
     @Test
-    fun isDatabaseNotOpen() {
+    fun testIsDatabaseNotOpen() {
         assertThat(database.isOpen).isFalse()
     }
 
     @ExperimentalCoroutinesApi
     @Test
-    fun isDatabaseOpen() = runBlockingTest {
-        val cocktailEntity = CocktailEntity("1",
-            "https://img1.mashed.com/img/gallery/heres-what-happens-when-you-drink-orange-juice-every-day/intro-1587655828.jpg",
-            "Orange Juice","A simple 100% orange juice",
-            "Non_Alcoholic")
-        database.cocktailDao().saveCocktail(cocktailEntity)
+    fun testIsDatabaseOpen() = runBlockingTest {
+        executeDatabaseFunction()
         assertThat(database.isOpen).isTrue()
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun testDatabaseVersionIsCurrent() = runBlockingTest {
+        executeDatabaseFunction()
+        assertThat(database.openHelper.readableDatabase.version).isEqualTo(3)
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun testDatabasePathIsMemory() = runBlockingTest {
+        executeDatabaseFunction()
+        assertThat(database.openHelper.readableDatabase.path).isEqualTo(":memory:")
     }
 
     @After
@@ -54,4 +66,14 @@ class AppDatabaseTest {
         database.close()
     }
 
+    @ExperimentalCoroutinesApi
+    private fun executeDatabaseFunction() = runBlockingTest {
+        val cocktailEntity = CocktailEntity(
+            "1",
+            "https://img1.mashed.com/img/gallery/heres-what-happens-when-you-drink-orange-juice-every-day/intro-1587655828.jpg",
+            "Orange Juice", "A simple 100% orange juice",
+            "Non_Alcoholic"
+        )
+        database.cocktailDao().saveCocktail(cocktailEntity)
+    }
 }
