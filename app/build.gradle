@@ -41,6 +41,13 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    packagingOptions {
+        exclude "**/attach_hotspot_windows.dll"
+        exclude "META-INF/licenses/**"
+        exclude "META-INF/AL2.0"
+        exclude "META-INF/LGPL2.1"
+    }
 }
 
 dependencies {
@@ -91,7 +98,16 @@ dependencies {
     // EventEmitter (one-off events)
     implementation 'com.github.Zhuinden:event-emitter:1.1.0'
 
-    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Local Unit Tests
+    testImplementation "com.google.truth:truth:1.0.1"
+
+    // Instrumented Unit Tests
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.12.1"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3" //1.2.1
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation "com.google.truth:truth:1.0.1"
 }
