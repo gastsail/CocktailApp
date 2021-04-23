@@ -33,7 +33,8 @@ class CocktailDaoTest {
     fun setUp() {
         database = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
-            AppDatabase::class.java)
+            AppDatabase::class.java
+        )
             .allowMainThreadQueries().build()
         dao = database.cocktailDao()
     }
@@ -43,10 +44,12 @@ class CocktailDaoTest {
     @Test
     fun testSaveFavoriteCocktail() = runBlockingTest {
 
-        val favoritesEntity = FavoritesEntity("1",
+        val favoritesEntity = FavoritesEntity(
+            "1",
             "https://img1.mashed.com/img/gallery/heres-what-happens-when-you-drink-orange-juice-every-day/intro-1587655828.jpg",
-            "Orange Juice","A simple 100% orange juice",
-            "Non_Alcoholic")
+            "Orange Juice", "A simple 100% orange juice",
+            "Non_Alcoholic"
+        )
         dao.saveFavoriteCocktail(favoritesEntity)
 
         val cockTails = dao.getAllFavoriteDrinksWithChanges().getOrAwaitValue()
@@ -59,14 +62,18 @@ class CocktailDaoTest {
     @Test
     fun testGetAllFavoriteCocktail() = runBlockingTest {
 
-        val favoritesEntity = FavoritesEntity("1",
+        val favoritesEntity = FavoritesEntity(
+            "1",
             "https://img1.mashed.com/img/gallery/heres-what-happens-when-you-drink-orange-juice-every-day/intro-1587655828.jpg",
-            "Orange Juice","A simple 100% orange juice",
-            "Non_Alcoholic")
-        val favoritesEntity2 = FavoritesEntity("2",
+            "Orange Juice", "A simple 100% orange juice",
+            "Non_Alcoholic"
+        )
+        val favoritesEntity2 = FavoritesEntity(
+            "2",
             "https://5.imimg.com/data5/YV/JM/ZE/SELLER-8455061/guava-juice-500x500.png",
-            "Guava Juice","A simple 100% guava juice",
-            "Non_Alcoholic")
+            "Guava Juice", "A simple 100% guava juice",
+            "Non_Alcoholic"
+        )
         dao.saveFavoriteCocktail(favoritesEntity)
         dao.saveFavoriteCocktail(favoritesEntity2)
 
@@ -81,10 +88,12 @@ class CocktailDaoTest {
     @Test
     fun testGetCocktailById() = runBlockingTest {
 
-        val favoritesEntity = FavoritesEntity("1",
+        val favoritesEntity = FavoritesEntity(
+            "1",
             "https://img1.mashed.com/img/gallery/heres-what-happens-when-you-drink-orange-juice-every-day/intro-1587655828.jpg",
-            "Orange Juice","A simple 100% orange juice",
-            "Non_Alcoholic")
+            "Orange Juice", "A simple 100% orange juice",
+            "Non_Alcoholic"
+        )
         dao.saveFavoriteCocktail(favoritesEntity)
 
         val cockTail = dao.getCocktailById(favoritesEntity.cocktailId)
@@ -96,10 +105,12 @@ class CocktailDaoTest {
     @ExperimentalCoroutinesApi
     @Test
     fun testDeleteFavoriteCocktail() = runBlockingTest {
-        val favoritesEntity = FavoritesEntity("1",
+        val favoritesEntity = FavoritesEntity(
+            "1",
             "https://img1.mashed.com/img/gallery/heres-what-happens-when-you-drink-orange-juice-every-day/intro-1587655828.jpg",
-            "Orange Juice","A simple 100% orange juice",
-            "Non_Alcoholic")
+            "Orange Juice", "A simple 100% orange juice",
+            "Non_Alcoholic"
+        )
         dao.saveFavoriteCocktail(favoritesEntity)
         dao.deleteFavoriteCoktail(favoritesEntity)
 
@@ -111,10 +122,12 @@ class CocktailDaoTest {
     @ExperimentalCoroutinesApi
     @Test
     fun testSaveCocktail() = runBlockingTest {
-        val cocktailEntity = CocktailEntity("1",
+        val cocktailEntity = CocktailEntity(
+            "1",
             "https://img1.mashed.com/img/gallery/heres-what-happens-when-you-drink-orange-juice-every-day/intro-1587655828.jpg",
-            "Orange Juice","A simple 100% orange juice",
-            "Non_Alcoholic")
+            "Orange Juice", "A simple 100% orange juice",
+            "Non_Alcoholic"
+        )
         dao.saveCocktail(cocktailEntity)
 
         val cockTails = dao.getCocktails("Orange Juice")
